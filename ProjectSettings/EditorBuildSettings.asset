@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Launcher.unity
+    guid: 2ddbb414ea0db0747942012da3d9f69d
+  - enabled: 1
+    path: Assets/Scenes/Room for 8.unity
+    guid: f36bb4d22316aa24782ec30adce03a01
+  m_configObjects: {}
