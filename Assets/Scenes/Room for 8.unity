@@ -225,6 +225,8 @@ MonoBehaviour:
   amountOfParticles: 1000
   particles: []
   particleScale: 1
+  particleMoveSpeed: 10
+  particleRotSpeed: 100
   spawnRadius: 2
 --- !u!4 &1121345412
 Transform:

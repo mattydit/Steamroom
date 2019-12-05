@@ -16,7 +16,7 @@ public class NoiseFlowField : MonoBehaviour
     public int amountOfParticles;
     [HideInInspector]
     public List<FlowfieldParticle> particles;
-    public float particleScale;
+    public float particleScale, particleMoveSpeed, particleRotSpeed;
     public float spawnRadius;
 
     bool particleSpawnValidadtion(Vector3 position)
@@ -83,6 +83,7 @@ public class NoiseFlowField : MonoBehaviour
     void Update()
     {
         CalculateFlowfieldDirections();
+        ParticleBehaviour();
     }
 
     void CalculateFlowfieldDirections()
@@ -104,6 +105,31 @@ public class NoiseFlowField : MonoBehaviour
                 yOff += increment;
             }
             xOff += increment;
+        }
+    }
+
+    void ParticleBehaviour()
+    {
+        foreach(FlowfieldParticle p in particles)
+        {
+            //X Edges
+            if(p.transform.position.x > this.transform.position.x + (gridSize.x * cellSize))
+            {
+                p.transform.position = new Vector3(this.transform.position.x, p.transform.position.y, p.transform.position.z);
+            }
+            if(p.transform.position.x < this.transform.position.x)
+            {
+                p.transform.position = new Vector3(this.transform.position.x + (gridSize.x * cellSize), p.transform.position.y, p.transform.position.z);
+            }
+
+            Vector3Int particlePos = new Vector3Int(
+               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.x) / cellSize, 0, gridSize.x - 1)),
+               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.y) / cellSize, 0, gridSize.y - 1)),
+               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.z) / cellSize, 0, gridSize.z - 1))
+            );
+            p.ApplyRotation(flowfieldDirection[particlePos.x, particlePos.y, particlePos.z] ,particleRotSpeed);
+            p.moveSpeed = particleMoveSpeed;
+            p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
         }
     }
 
