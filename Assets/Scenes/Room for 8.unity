@@ -222,7 +222,7 @@ MonoBehaviour:
   offsetSpeed: {x: 0, y: 0, z: 0}
   particlePrefab: {fileID: 8196016983537906848, guid: b6fdaa20752899349ab0edb573dd73a7,
     type: 3}
-  amountOfParticles: 1000
+  amountOfParticles: 500
   particles: []
   particleScale: 1
   particleMoveSpeed: 10
