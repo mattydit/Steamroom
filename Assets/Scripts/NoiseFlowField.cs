@@ -121,6 +121,24 @@ public class NoiseFlowField : MonoBehaviour
             {
                 p.transform.position = new Vector3(this.transform.position.x + (gridSize.x * cellSize), p.transform.position.y, p.transform.position.z);
             }
+            //Y Edges
+            if (p.transform.position.y > this.transform.position.y + (gridSize.y * cellSize))
+            {
+                p.transform.position = new Vector3(p.transform.position.y, this.transform.position.y, p.transform.position.z);
+            }
+            if (p.transform.position.y < this.transform.position.y)
+            {
+                p.transform.position = new Vector3(p.transform.position.x, this.transform.position.y + (gridSize.y * cellSize), p.transform.position.z);
+            }
+            //Z Edges
+            if (p.transform.position.z > this.transform.position.z + (gridSize.z * cellSize))
+            {
+                p.transform.position = new Vector3(p.transform.position.x, p.transform.position.y, this.transform.position.z);
+            }
+            if (p.transform.position.z < this.transform.position.z)
+            {
+                p.transform.position = new Vector3(p.transform.position.x, p.transform.position.y, this.transform.position.z + (gridSize.z * cellSize));
+            }
 
             Vector3Int particlePos = new Vector3Int(
                Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.x) / cellSize, 0, gridSize.x - 1)),
