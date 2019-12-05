@@ -88,6 +88,8 @@ public class NoiseFlowField : MonoBehaviour
 
     void CalculateFlowfieldDirections()
     {
+        offset = new Vector3(offset.x + (offsetSpeed.x * Time.deltaTime), offset.y + (offsetSpeed.y * Time.deltaTime), offset.y + (offsetSpeed.z * Time.deltaTime));
+
         float xOff = 0f;
         for (int x = 0; x < gridSize.x; x++)
         {
