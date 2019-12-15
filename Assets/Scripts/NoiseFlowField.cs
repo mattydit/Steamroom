@@ -147,8 +147,8 @@ public class NoiseFlowField : MonoBehaviour
 
             Vector3Int particlePos = new Vector3Int(
                Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.x) / cellSize, 0, gridSize.x - 1)),
-               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.y) / cellSize, 0, gridSize.y - 1)),
-               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.x - this.transform.position.z) / cellSize, 0, gridSize.z - 1))
+               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.y - this.transform.position.y) / cellSize, 0, gridSize.y - 1)),
+               Mathf.FloorToInt(Mathf.Clamp((p.transform.position.z - this.transform.position.z) / cellSize, 0, gridSize.z - 1))
             );
             p.ApplyRotation(flowfieldDirection[particlePos.x, particlePos.y, particlePos.z] ,particleRotSpeed);
             p.moveSpeed = particleMoveSpeed;
