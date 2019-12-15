@@ -16,6 +16,7 @@ public class NoiseFlowField : MonoBehaviour
     public int amountOfParticles;
     [HideInInspector]
     public List<FlowfieldParticle> particles;
+    public List<MeshRenderer> particleMeshRenderer;
     public float particleScale, particleMoveSpeed, particleRotSpeed;
     public float spawnRadius;
 
@@ -42,11 +43,12 @@ public class NoiseFlowField : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         flowfieldDirection = new Vector3[gridSize.x, gridSize.y, gridSize.z];
         fn = new FastNoise();
         particles = new List<FlowfieldParticle>();
+        particleMeshRenderer = new List<MeshRenderer>();
 
         for (int i = 0; i < amountOfParticles; i++)
         {
@@ -67,6 +69,7 @@ public class NoiseFlowField : MonoBehaviour
                     particleInstance.transform.parent = this.transform;
                     particleInstance.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
                     particles.Add(particleInstance.GetComponent<FlowfieldParticle>());
+                    particleMeshRenderer.Add(particleInstance.GetComponent<MeshRenderer>());
                     break;
                 }
                 if(!isValid)
@@ -88,7 +91,7 @@ public class NoiseFlowField : MonoBehaviour
 
     void CalculateFlowfieldDirections()
     {
-        offset = new Vector3(offset.x + (offsetSpeed.x * Time.deltaTime), offset.y + (offsetSpeed.y * Time.deltaTime), offset.y + (offsetSpeed.z * Time.deltaTime));
+        offset = new Vector3(offset.x + (offsetSpeed.x * Time.deltaTime), offset.y + (offsetSpeed.y * Time.deltaTime), offset.z + (offsetSpeed.z * Time.deltaTime));
 
         float xOff = 0f;
         for (int x = 0; x < gridSize.x; x++)
@@ -126,7 +129,7 @@ public class NoiseFlowField : MonoBehaviour
             //Y Edges
             if (p.transform.position.y > this.transform.position.y + (gridSize.y * cellSize))
             {
-                p.transform.position = new Vector3(p.transform.position.y, this.transform.position.y, p.transform.position.z);
+                p.transform.position = new Vector3(p.transform.position.x, this.transform.position.y, p.transform.position.z);
             }
             if (p.transform.position.y < this.transform.position.y)
             {
@@ -149,7 +152,7 @@ public class NoiseFlowField : MonoBehaviour
             );
             p.ApplyRotation(flowfieldDirection[particlePos.x, particlePos.y, particlePos.z] ,particleRotSpeed);
             p.moveSpeed = particleMoveSpeed;
-            p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
+            //p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
         }
     }
 

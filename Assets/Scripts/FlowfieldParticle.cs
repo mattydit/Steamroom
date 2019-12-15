@@ -5,6 +5,8 @@ using UnityEngine;
 public class FlowfieldParticle : MonoBehaviour
 {
     public float moveSpeed;
+    public int audioBand;
+
     // Start is called before the first frame update
     void Start()
     {
