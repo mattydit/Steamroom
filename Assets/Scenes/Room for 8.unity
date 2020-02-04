@@ -959,7 +959,7 @@ MonoBehaviour:
   - 0
   amplitude: 0
   amplitudeBuffer: 0
-  audioClip: {fileID: 8300000, guid: bfb5b132f35ee5c4391fcda850dc9cd7, type: 3}
+  audioClip: {fileID: 0}
   useMicrophone: 0
   selectedDevice: 
   mixerGroupMic: {fileID: -6900156171555772955, guid: a93698d716319c543a67805c4b38782d,

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent (typeof (AudioSource))]
 public class AudioPeer : MonoBehaviour
 {
     AudioSource audioSrc;
+    string file = "file://D:/Music/Madvillain - Raid feat. MED.wav";
     public static float[] samples = new float[512];
     public static float[] freqBands = new float[8];
     public static float[] bandBuffer = new float[8];
@@ -25,8 +27,13 @@ public class AudioPeer : MonoBehaviour
     public UnityEngine.Audio.AudioMixerGroup mixerGroupMic, mixerGroupMaster;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        StartCoroutine(GetAudioClip());
+    }
     void Start()
     {
+        
         audioSrc = GetComponent<AudioSource>();
 
         //Microphone input
@@ -159,5 +166,23 @@ public class AudioPeer : MonoBehaviour
 
         amplitude = currentAmplitude / amplitudeHighest;
         amplitudeBuffer = currentAmplitudeBuffer / amplitudeHighest;
+    }
+
+    IEnumerator GetAudioClip()
+    {
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(file, AudioType.WAV))
+        {
+            yield return www.Send();
+
+            if (www.isError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                audioClip = DownloadHandlerAudioClip.GetContent(www);
+            }
+        }
+
     }
 }
