@@ -8,6 +8,7 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
+    public GameObject menuCanvas;
 
     public override void OnLeftRoom()
     {
@@ -36,7 +37,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+        //Open Menu
+        OpenMenu();
     }
 
     void LoadArena()
@@ -70,6 +72,22 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
 
             LoadArena();
+        }
+    }
+
+    public void OpenMenu()
+    {
+        if (OVRInput.GetDown(OVRInput.RawButton.Y))
+        {
+            if (menuCanvas.activeSelf == false)
+            {
+                menuCanvas.SetActive(true);
+            }
+            else if (menuCanvas.activeSelf == true)
+            {
+                menuCanvas.SetActive(false);
+            }
+
         }
     }
 }
