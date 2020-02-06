@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OpenMenu()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.Y))
+        if (OVRInput.GetDown(OVRInput.RawButton.Y) || Input.GetKeyDown("escape"))
         {
             if (menuCanvas.activeSelf == false)
             {

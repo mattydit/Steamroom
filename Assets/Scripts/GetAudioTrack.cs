@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class GetAudioTrack : MonoBehaviour
 {
     string file = "file://D:/Music/Madvillain - Raid feat. MED.wav";
+    public GameObject fileBrowser;
 
     // Start is called before the first frame update
     void Start()
@@ -36,4 +37,9 @@ public class GetAudioTrack : MonoBehaviour
         }
 
     }
+
+    private void OpenFileBrowser(FileBrowserMode fileBrowserMode)
+
 }
+
+
