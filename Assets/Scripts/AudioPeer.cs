@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using GracesGames.SimpleFileBrowser.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+
 
 [RequireComponent (typeof (AudioSource))]
 public class AudioPeer : MonoBehaviour
 {
     AudioSource audioSrc;
+    public string[] audioFiles;
     string file = "file://D:/Music/Madvillain - Raid feat. MED.wav";
     public static float[] samples = new float[512];
     public static float[] freqBands = new float[8];
@@ -25,6 +28,10 @@ public class AudioPeer : MonoBehaviour
     public bool useMicrophone;
     public string selectedDevice;
     public UnityEngine.Audio.AudioMixerGroup mixerGroupMic, mixerGroupMaster;
+
+    //File Browser
+    public GameObject fileBrowserPrefab;
+    public string[] fileExtensions;
 
     // Start is called before the first frame update
     private void Awake()
@@ -184,5 +191,27 @@ public class AudioPeer : MonoBehaviour
             }
         }
 
+    }
+
+    public void OpenFileBrowser()
+    {
+        GameObject fileBrowserObject = Instantiate(fileBrowserPrefab, transform);
+        fileBrowserObject.name = "FileBrowser";
+
+        FileBrowser fileBrowserScript = fileBrowserObject.GetComponent<FileBrowser>();
+
+        fileBrowserScript.SetupFileBrowser(ViewMode.Landscape);
+
+        fileBrowserScript.OpenFilePanel(fileExtensions);
+
+        //fileBrowserScript.OnFileSelect += LoadFileUsingPath;
+    }
+
+    private void LoadFileUsingPath(string path)
+    {
+        if (path.Length != 0)
+        {
+           
+        }
     }
 }

@@ -1142,7 +1142,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1500259732}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1664188190}
+        m_MethodName: OpenFileBrowser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1500259732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,6 +1220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b66d19add2fc54c9c476861ced7092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioFiles: []
   audioBand:
   - 0
   - 0
@@ -1235,6 +1247,10 @@ MonoBehaviour:
   mixerGroupMic: {fileID: -6900156171555772955, guid: a93698d716319c543a67805c4b38782d,
     type: 2}
   mixerGroupMaster: {fileID: 24300002, guid: a93698d716319c543a67805c4b38782d, type: 2}
+  fileBrowserPrefab: {fileID: 1760643962491650, guid: 4599b5ba3543545db92bb18160cea721,
+    type: 3}
+  fileExtensions:
+  - .wav
 --- !u!82 &1664188191
 AudioSource:
   m_ObjectHideFlags: 0

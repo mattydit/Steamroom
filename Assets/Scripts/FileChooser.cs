@@ -30,7 +30,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts
 
             fileBrowserscript.SetupFileBrowser(ViewMode.Landscape);
 
-            fileBrowserscript.OpenFilePanel(FileExtensions);
+            //fileBrowserscript.OpenFilePanel(FileExtensions);
         }
     }
 }
