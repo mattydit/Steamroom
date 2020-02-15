@@ -13,7 +13,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 	public abstract class UserInterface : MonoBehaviour {
 
 		// Dimension used to set the scale of the UI
-		[Range(0.1f, 1.0f)] public float UserInterfaceScale = 1f;
+		[Range(0.1f, 1.0f)] public float UserInterfaceScale = 0.5f;
 
 		// Button Prefab used to create a button for each directory in the current path
 		public GameObject DirectoryButtonPrefab;

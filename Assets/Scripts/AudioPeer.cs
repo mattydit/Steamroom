@@ -8,7 +8,9 @@ using UnityEngine.Networking;
 [RequireComponent (typeof (AudioSource))]
 public class AudioPeer : MonoBehaviour
 {
-    AudioSource audioSrc;
+    public AudioSource[] audioSrc;
+    int index = 0;
+
     public string[] audioFiles;
     string file = "file://D:/Music/Madvillain - Raid feat. MED.wav";
     public static float[] samples = new float[512];
@@ -41,7 +43,7 @@ public class AudioPeer : MonoBehaviour
     void Start()
     {
         
-        audioSrc = GetComponent<AudioSource>();
+        audioSrc[index] = GetComponent<AudioSource>();
 
         //Microphone input
         if(useMicrophone == true)
@@ -49,8 +51,8 @@ public class AudioPeer : MonoBehaviour
             if(Microphone.devices.Length > 0)
             {
                 selectedDevice = Microphone.devices[0].ToString();
-                audioSrc.outputAudioMixerGroup = mixerGroupMic;
-                audioSrc.clip = Microphone.Start(selectedDevice, true, 2400, AudioSettings.outputSampleRate);
+                audioSrc[index].outputAudioMixerGroup = mixerGroupMic;
+                audioSrc[index].clip = Microphone.Start(selectedDevice, true, 2400, AudioSettings.outputSampleRate);
 
             }
             else
@@ -60,11 +62,11 @@ public class AudioPeer : MonoBehaviour
         }
         else
         {
-            audioSrc.outputAudioMixerGroup = mixerGroupMaster;
-            audioSrc.clip = audioClip;
+            audioSrc[index].outputAudioMixerGroup = mixerGroupMaster;
+            audioSrc[index].clip = audioClip;
         }
 
-        audioSrc.Play();
+        audioSrc[index].Play();
     }
 
     // Update is called once per frame
@@ -79,7 +81,7 @@ public class AudioPeer : MonoBehaviour
 
     void GetSpectrumAudioSource()
     {
-        audioSrc.GetSpectrumData(samples, 0, FFTWindow.Blackman);
+        //audioSrc.GetSpectrumData(samples, 0, FFTWindow.Blackman);
     }
 
     void MakeFrequencyBands()
