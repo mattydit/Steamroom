@@ -8,11 +8,12 @@ using UnityEngine.Networking;
 [RequireComponent (typeof (AudioSource))]
 public class AudioPeer : MonoBehaviour
 {
-    public AudioSource[] audioSrc;
+    public AudioSource audioSrc;
+    public bool audioSwitchedOn;
     int index = 0;
 
     public string[] audioFiles;
-    string file = "file://D:/Music/Madvillain - Raid feat. MED.wav";
+    string file; //= "file://D:/Music/Madvillain - Raid feat. MED.wav";
     public static float[] samples = new float[512];
     public static float[] freqBands = new float[8];
     public static float[] bandBuffer = new float[8];
@@ -36,14 +37,11 @@ public class AudioPeer : MonoBehaviour
     public string[] fileExtensions;
 
     // Start is called before the first frame update
-    private void Awake()
-    {
-        StartCoroutine(GetAudioClip());
-    }
+
     void Start()
     {
         
-        audioSrc[index] = GetComponent<AudioSource>();
+        audioSrc = GetComponent<AudioSource>();
 
         //Microphone input
         if(useMicrophone == true)
@@ -51,8 +49,8 @@ public class AudioPeer : MonoBehaviour
             if(Microphone.devices.Length > 0)
             {
                 selectedDevice = Microphone.devices[0].ToString();
-                audioSrc[index].outputAudioMixerGroup = mixerGroupMic;
-                audioSrc[index].clip = Microphone.Start(selectedDevice, true, 2400, AudioSettings.outputSampleRate);
+                audioSrc.outputAudioMixerGroup = mixerGroupMic;
+                audioSrc.clip = Microphone.Start(selectedDevice, true, 2400, AudioSettings.outputSampleRate);
 
             }
             else
@@ -62,16 +60,26 @@ public class AudioPeer : MonoBehaviour
         }
         else
         {
-            audioSrc[index].outputAudioMixerGroup = mixerGroupMaster;
-            audioSrc[index].clip = audioClip;
+            audioSrc.outputAudioMixerGroup = mixerGroupMaster;
+            //audioSrc.clip = audioClip;
         }
 
-        audioSrc[index].Play();
+        //audioSrc.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (audioSwitchedOn == true && audioSrc.isPlaying == false)
+        {
+            audioSrc.clip = audioClip;
+            audioSrc.Play();
+        }
+        else if (audioSwitchedOn == false && audioSrc.isPlaying == true)
+        {
+            audioSrc.Stop();
+        }
+
         GetSpectrumAudioSource();
         MakeFrequencyBands();
         BandBuffer();
@@ -183,7 +191,7 @@ public class AudioPeer : MonoBehaviour
         {
             yield return www.Send();
 
-            if (www.isError)
+            if (www.isNetworkError)
             {
                 Debug.Log(www.error);
             }
@@ -206,14 +214,18 @@ public class AudioPeer : MonoBehaviour
 
         fileBrowserScript.OpenFilePanel(fileExtensions);
 
-        //fileBrowserScript.OnFileSelect += LoadFileUsingPath;
+        fileBrowserScript.OnFileSelect += LoadFileUsingPath;
     }
 
     private void LoadFileUsingPath(string path)
     {
+        Debug.Log(path);
         if (path.Length != 0)
         {
-           
+            file = path;
         }
+
+        StartCoroutine(GetAudioClip());
+
     }
 }
