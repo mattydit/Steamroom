@@ -32,7 +32,10 @@ public class GenerateWorld : MonoBehaviour
 
             // array out of range ?
             if (vertIndex - (tileCount + 2) < 0)
-                continue;
+            {
+                Debug.Log("Out of Range");
+            }
+            
 
             //set new high
             tileHeight = vertices[vertIndex].y * 3;
@@ -61,6 +64,11 @@ public class GenerateWorld : MonoBehaviour
         }
         //bake
         this.transform.GetComponent<MeshFilter>().mesh.vertices = vertices;
+        this.transform.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        DestroyImmediate(this.GetComponent<MeshCollider>());
+        this.gameObject.AddComponent<MeshCollider>();
+
+
     }
 
     // Update is called once per frame
