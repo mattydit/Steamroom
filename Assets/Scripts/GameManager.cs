@@ -26,12 +26,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PlayerManager.LocalPlayerInstance == null)
         {
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+            //PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
         }
         else
         {
             Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
         }
+
     }
 
     // Update is called once per frame
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 menuCanvas.SetActive(false);
             }
+
 
         }
     }
