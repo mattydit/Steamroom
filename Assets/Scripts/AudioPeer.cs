@@ -227,5 +227,6 @@ public class AudioPeer : MonoBehaviour
 
         StartCoroutine(GetAudioClip());
 
+        audioSwitchedOn = true;
     }
 }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
     public GameObject menuCanvas;
+    public GameObject pointer;
 
     public override void OnLeftRoom()
     {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PlayerManager.LocalPlayerInstance == null)
         {
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            //PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
         }
         else
         {
@@ -78,15 +79,17 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OpenMenu()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.Y) || Input.GetKeyDown("escape"))
+        if (OVRInput.GetDown(OVRInput.RawButton.B) || Input.GetKeyDown("escape"))
         {
             if (menuCanvas.activeSelf == false)
             {
                 menuCanvas.SetActive(true);
+                pointer.SetActive(true);
             }
             else if (menuCanvas.activeSelf == true)
             {
                 menuCanvas.SetActive(false);
+                pointer.SetActive(false);
             }
 
 
