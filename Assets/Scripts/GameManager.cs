@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice.PUN;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
     public GameObject menuCanvas;
     public GameObject pointer;
+
+    private PhotonVoiceNetwork punVoiceNetwork;
 
     public override void OnLeftRoom()
     {
@@ -19,6 +22,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+    }
+    private void Awake()
+    {
+        //punVoiceNetwork = PhotonVoiceNetwork.Instance;
     }
 
     // Start is called before the first frame update
