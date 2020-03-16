@@ -7,6 +7,7 @@ using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using Photon.Pun;
 
 #if AVATAR_INTERNAL
 using UnityEngine.Events;
@@ -663,6 +664,7 @@ public class OvrAvatar : MonoBehaviour
 
     void Update()
     {
+
         if (!OvrAvatarSDKManager.Instance || sdkAvatar == IntPtr.Zero || materialManager == null)
         {
             return;
