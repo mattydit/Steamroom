@@ -42,7 +42,7 @@ public class PacketRecordSettings
     internal float AccumulatedTime;
 };
 
-public class OvrAvatar : MonoBehaviour
+public class OvrAvatar : MonoBehaviourPun
 {
     [Header("Avatar")]
     public IntPtr sdkAvatar = IntPtr.Zero;
@@ -664,6 +664,10 @@ public class OvrAvatar : MonoBehaviour
 
     void Update()
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
 
         if (!OvrAvatarSDKManager.Instance || sdkAvatar == IntPtr.Zero || materialManager == null)
         {
