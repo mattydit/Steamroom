@@ -8,6 +8,8 @@ public class AudioFlowField : MonoBehaviour
     NoiseFlowField noiseFlowfield;
     public AudioPeer audioPeer;
 
+    AudioSource audioSrc;
+
     //Speed
     public bool useSpeed;
     public Vector2 moveSpeedMinMax, rotateSpeedMinMax;
@@ -37,6 +39,7 @@ public class AudioFlowField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSrc = audioPeer.GetComponent<AudioSource>();
         noiseFlowfield = GetComponent<NoiseFlowField>();
         audioMat = new Material[8];
         colour1 = new Color[8];
@@ -63,45 +66,50 @@ public class AudioFlowField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (useSpeed)
+        if (audioPeer.audioSwitchedOn == true && audioSrc.isPlaying)
         {
-            noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x , moveSpeedMinMax.y, audioPeer.amplitudeBuffer) / 2;
-            noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, audioPeer.amplitudeBuffer) / 2;
+            if (useSpeed)
+            {
+                noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, audioPeer.amplitudeBuffer) / 2;
+                noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, audioPeer.amplitudeBuffer) / 2;
+            }
+
+            for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
+            {
+                if (useScale)
+                {
+                    float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, audioPeer.audioBandBuffer[noiseFlowfield.particles[i].audioBand]) / 2;
+                    noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+
+                if (audioPeer.audioBandBuffer[i] > colourThreshold1)
+                {
+                    audioMat[i].SetColor(colourName1, colour1[i] * audioPeer.audioBandBuffer[i] * colourMultiplier1);
+                }
+                else
+                {
+                    audioMat[i].SetColor(colourName1, colour1[i] * 0f);
+                }
+
+                if (audioPeer.audioBand[i] > colourThreshold2)
+                {
+                    audioMat[i].SetColor(colourName2, colour2[i] * audioPeer.audioBand[i] * colourMultiplier2);
+                }
+                else
+                {
+                    audioMat[i].SetColor(colourName2, colour2[i] * 0f);
+                }
+
+            }
+
+            //noiseFlowfield.cube.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
+            //noiseFlowfield.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
         }
-
-        for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
-        {
-            if (useScale)
-            {
-                float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, audioPeer.audioBandBuffer[noiseFlowfield.particles[i].audioBand]);
-                noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
-            }
-        }
-
-        for (int i = 0; i < 8; i++)
-        {
-
-            if (audioPeer.audioBandBuffer[i] > colourThreshold1)
-            {
-                audioMat[i].SetColor(colourName1, colour1[i] * audioPeer.audioBandBuffer[i] * colourMultiplier1);
-            }
-            else
-            {
-                audioMat[i].SetColor(colourName1, colour1[i] * 0f);
-            }
-
-            if (audioPeer.audioBand[i] > colourThreshold2)
-            {
-                audioMat[i].SetColor(colourName2, colour2[i] * audioPeer.audioBand[i] * colourMultiplier2);
-            }
-            else
-            {
-                audioMat[i].SetColor(colourName2, colour2[i] * 0f);
-            }
-
-        }
-
-        //noiseFlowfield.cube.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
-        //noiseFlowfield.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
     }
+
+       
 }
