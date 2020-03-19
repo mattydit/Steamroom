@@ -664,10 +664,12 @@ public class OvrAvatar : MonoBehaviourPun
 
     void Update()
     {
+        
         if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
         {
             return;
         }
+        
 
         if (!OvrAvatarSDKManager.Instance || sdkAvatar == IntPtr.Zero || materialManager == null)
         {

@@ -9,8 +9,8 @@ using Photon.Voice.PUN;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
-    public GameObject menuCanvas;
-    public GameObject pointer;
+    //public GameObject menuCanvas;
+    //public GameObject pointer;
 
     private PhotonVoiceNetwork punVoiceNetwork;
 
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Update()
     {
         //Open Menu
-        OpenMenu();
+        //OpenMenu();
     }
 
     void LoadArena()
@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    /*
     public void OpenMenu()
     {
         if (OVRInput.GetDown(OVRInput.RawButton.B) || Input.GetKeyDown("escape"))
@@ -102,4 +103,5 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         }
     }
+    */
 }
