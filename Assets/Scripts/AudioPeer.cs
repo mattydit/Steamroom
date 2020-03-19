@@ -91,7 +91,7 @@ public class AudioPeer : MonoBehaviour
 
     void GetSpectrumAudioSource()
     {
-        //audioSrc.GetSpectrumData(samples, 0, FFTWindow.Blackman);
+        audioSrc.GetSpectrumData(samples, 0, FFTWindow.Blackman);
     }
 
     void MakeFrequencyBands()

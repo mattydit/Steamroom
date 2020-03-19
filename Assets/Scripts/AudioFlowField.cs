@@ -28,7 +28,7 @@ public class AudioFlowField : MonoBehaviour
     [Range(0f, 1f)]
     public float colourThreshold1;
     public float colourMultiplier1;
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     public float colourThreshold2;
     public float colourMultiplier2;
     public string colourName1;
@@ -63,15 +63,15 @@ public class AudioFlowField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(useSpeed)
+        if (useSpeed)
         {
-            noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, audioPeer.amplitudeBuffer);
-            noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, audioPeer.amplitudeBuffer);
+            noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x , moveSpeedMinMax.y, audioPeer.amplitudeBuffer) / 2;
+            noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, audioPeer.amplitudeBuffer) / 2;
         }
 
         for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
         {
-            if(useScale)
+            if (useScale)
             {
                 float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, audioPeer.audioBandBuffer[noiseFlowfield.particles[i].audioBand]);
                 noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
@@ -80,28 +80,28 @@ public class AudioFlowField : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            if(useColour1)
+
+            if (audioPeer.audioBandBuffer[i] > colourThreshold1)
             {
-                if(audioPeer.audioBandBuffer[i] > colourThreshold1)
-                {
-                    audioMat[i].SetColor(colourName1, colour1[i] * audioPeer.audioBandBuffer[i] * colourMultiplier1);
-                }
-                else
-                {
-                    audioMat[i].SetColor(colourName1, colour1[i] * 0f);
-                }
+                audioMat[i].SetColor(colourName1, colour1[i] * audioPeer.audioBandBuffer[i] * colourMultiplier1);
             }
-            if(useColour2)
+            else
             {
-                if (audioPeer.audioBand[i] > colourThreshold2)
-                {
-                    audioMat[i].SetColor(colourName2, colour2[i] * audioPeer.audioBand[i] * colourMultiplier2);
-                }
-                else
-                {
-                    audioMat[i].SetColor(colourName2, colour2[i] * 0f);
-                }
+                audioMat[i].SetColor(colourName1, colour1[i] * 0f);
             }
+
+            if (audioPeer.audioBand[i] > colourThreshold2)
+            {
+                audioMat[i].SetColor(colourName2, colour2[i] * audioPeer.audioBand[i] * colourMultiplier2);
+            }
+            else
+            {
+                audioMat[i].SetColor(colourName2, colour2[i] * 0f);
+            }
+
         }
+
+        //noiseFlowfield.cube.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
+        //noiseFlowfield.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
     }
 }

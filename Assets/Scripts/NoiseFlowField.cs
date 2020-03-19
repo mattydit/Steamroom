@@ -20,6 +20,10 @@ public class NoiseFlowField : MonoBehaviour
     public float particleScale, particleMoveSpeed, particleRotSpeed;
     public float spawnRadius;
 
+    public Material BigCubeMaterial;
+
+    public GameObject cube;
+
     bool particleSpawnValidadtion(Vector3 position)
     {
         bool valid = true;
@@ -45,6 +49,8 @@ public class NoiseFlowField : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //DrawCube();
+
         flowfieldDirection = new Vector3[gridSize.x, gridSize.y, gridSize.z];
         fn = new FastNoise();
         particles = new List<FlowfieldParticle>();
@@ -54,7 +60,7 @@ public class NoiseFlowField : MonoBehaviour
         {
             int attempt = 0;
 
-            while(attempt < 100)
+            while (attempt < 100)
             {
                 Vector3 randomPos = new Vector3(
                     Random.Range(this.transform.position.x, this.transform.position.x + gridSize.x * cellSize),
@@ -72,7 +78,7 @@ public class NoiseFlowField : MonoBehaviour
                     particleMeshRenderer.Add(particleInstance.GetComponent<MeshRenderer>());
                     break;
                 }
-                if(!isValid)
+                if (!isValid)
                 {
                     attempt++;
                 }
@@ -115,14 +121,14 @@ public class NoiseFlowField : MonoBehaviour
 
     void ParticleBehaviour()
     {
-        foreach(FlowfieldParticle p in particles)
+        foreach (FlowfieldParticle p in particles)
         {
             //X Edges
-            if(p.transform.position.x > this.transform.position.x + (gridSize.x * cellSize))
+            if (p.transform.position.x > this.transform.position.x + (gridSize.x * cellSize))
             {
                 p.transform.position = new Vector3(this.transform.position.x, p.transform.position.y, p.transform.position.z);
             }
-            if(p.transform.position.x < this.transform.position.x)
+            if (p.transform.position.x < this.transform.position.x)
             {
                 p.transform.position = new Vector3(this.transform.position.x + (gridSize.x * cellSize), p.transform.position.y, p.transform.position.z);
             }
@@ -150,7 +156,7 @@ public class NoiseFlowField : MonoBehaviour
                Mathf.FloorToInt(Mathf.Clamp((p.transform.position.y - this.transform.position.y) / cellSize, 0, gridSize.y - 1)),
                Mathf.FloorToInt(Mathf.Clamp((p.transform.position.z - this.transform.position.z) / cellSize, 0, gridSize.z - 1))
             );
-            p.ApplyRotation(flowfieldDirection[particlePos.x, particlePos.y, particlePos.z] ,particleRotSpeed);
+            p.ApplyRotation(flowfieldDirection[particlePos.x, particlePos.y, particlePos.z], particleRotSpeed);
             p.moveSpeed = particleMoveSpeed;
             //p.transform.localScale = new Vector3(particleScale, particleScale, particleScale);
         }
@@ -159,8 +165,18 @@ public class NoiseFlowField : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(this.transform.position + new Vector3((gridSize.x * cellSize) * 0.5f, 
+        Gizmos.DrawWireCube(this.transform.position + new Vector3((gridSize.x * cellSize) * 0.5f,
             (gridSize.y * cellSize) * 0.5f, (gridSize.z * cellSize) * 0.5f),
             new Vector3(gridSize.x * cellSize, gridSize.y * cellSize, gridSize.z * cellSize));
+    }
+
+    private void DrawCube()
+    {
+        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.position = this.transform.position + new Vector3((gridSize.x * cellSize) * 0.5f,
+            (gridSize.y * cellSize) * 0.5f, (gridSize.z * cellSize) * 0.5f);
+        cube.transform.localScale = new Vector3((gridSize.x * cellSize) + 10, (gridSize.y * cellSize) + 10, (gridSize.z * cellSize) + 10);
+        cube.GetComponent<Renderer>().material = BigCubeMaterial;
+        cube.GetComponent<Collider>().enabled = false;
     }
 }
