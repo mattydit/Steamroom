@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-public class Launcher : MonoBehaviourPunCallbacks
+public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     [SerializeField]
     private byte maxPlayersPerRoom = 4;
@@ -18,6 +19,20 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     bool isConnecting;
 
+    public const byte InstantiateVrAvatarEventCode = 5;
+
+    [SerializeField]
+    private string roomName = "steamroomOculus";
+
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
 
     #region MonoBehaviour Callbacks
 
@@ -95,9 +110,45 @@ public class Launcher : MonoBehaviourPunCallbacks
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
         Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
+
+        /*
+        GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
+        PhotonView photonView = localAvatar.GetComponent<PhotonView>();
+
+        if (PhotonNetwork.AllocateViewID(photonView))
+        {
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                CachingOption = EventCaching.AddToRoomCache,
+                Receivers = ReceiverGroup.Others
+            };
+
+            PhotonNetwork.RaiseEvent(InstantiateVrAvatarEventCode, photonView.ViewID, raiseEventOptions, SendOptions.SendReliable);
+        }
+        else
+        {
+            Debug.LogError("Failed to allocate a ViewID");
+
+            Destroy(localAvatar);
+        }
+        */
+
         PhotonNetwork.LoadLevel(1);
     }
 
+    public void OnEvent(EventData photonEvent)
+    {
+        /*
+        if (photonEvent.Code == InstantiateVrAvatarEventCode)
+        {
+            GameObject remoteAvatar = Instantiate(Resources.Load("RemoveAvatar")) as GameObject;
+            PhotonView photonView = remoteAvatar.GetComponent<PhotonView>();
+            photonView.ViewID = (int)photonEvent.CustomData;
+        }
+        */
+    }
+
     #endregion
+
 
 }
