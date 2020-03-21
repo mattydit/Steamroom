@@ -107,6 +107,11 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        if (notReadyForSerialization)
+        {
+            return;
+        }
+
         if (stream.IsWriting)
         {
             if (packetData.Count == 0)
