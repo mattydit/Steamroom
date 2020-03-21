@@ -7,7 +7,6 @@ using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using Photon.Pun;
 
 #if AVATAR_INTERNAL
 using UnityEngine.Events;
@@ -42,7 +41,7 @@ public class PacketRecordSettings
     internal float AccumulatedTime;
 };
 
-public class OvrAvatar : MonoBehaviourPun
+public class OvrAvatar : MonoBehaviour
 {
     [Header("Avatar")]
     public IntPtr sdkAvatar = IntPtr.Zero;
@@ -664,12 +663,6 @@ public class OvrAvatar : MonoBehaviourPun
 
     void Update()
     {
-        
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
-        {
-            return;
-        }
-        
 
         if (!OvrAvatarSDKManager.Instance || sdkAvatar == IntPtr.Zero || materialManager == null)
         {
