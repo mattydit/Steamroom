@@ -93,6 +93,33 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        throw new System.NotImplementedException();
+        if (stream.IsWriting)
+        {
+            if (packetData.Count == 0)
+            {
+                return;
+            }
+
+            stream.SendNext(packetData.Count);
+
+            foreach (byte[] b in packetData)
+            {
+                stream.SendNext(b);
+            }
+
+            packetData.Clear();
+        }
+
+        if (stream.IsReading)
+        {
+            int num = (int)stream.ReceiveNext();
+
+            for (int counter = 0; counter < num; ++counter)
+            {
+                byte[] data = (byte[])stream.ReceiveNext();
+
+                DeserializeAndQueuePacketData(data);
+            }
+        }
     }
 }

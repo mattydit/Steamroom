@@ -9,8 +9,6 @@ using Photon.Voice.PUN;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
-    //public GameObject menuCanvas;
-    //public GameObject pointer;
 
     private PhotonVoiceNetwork punVoiceNetwork;
 
@@ -31,6 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        /*
         if (PlayerManager.LocalPlayerInstance == null)
         {
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
@@ -40,14 +39,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
         }
-
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Open Menu
-        //OpenMenu();
+        
     }
 
     void LoadArena()
@@ -84,24 +82,4 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    /*
-    public void OpenMenu()
-    {
-        if (OVRInput.GetDown(OVRInput.RawButton.B) || Input.GetKeyDown("escape"))
-        {
-            if (menuCanvas.activeSelf == false)
-            {
-                menuCanvas.SetActive(true);
-                pointer.SetActive(true);
-            }
-            else if (menuCanvas.activeSelf == true)
-            {
-                menuCanvas.SetActive(false);
-                pointer.SetActive(false);
-            }
-
-
-        }
-    }
-    */
 }
