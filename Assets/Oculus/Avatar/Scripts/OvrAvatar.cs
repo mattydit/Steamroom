@@ -67,6 +67,8 @@ public class OvrAvatar : MonoBehaviour
     public bool ShowThirdPerson;
     internal ovrAvatarCapabilities Capabilities = ovrAvatarCapabilities.Body;
 
+    public bool initialized = false;
+
     [Header("Performance")]
 #if UNITY_ANDROID
     [Tooltip(
@@ -265,6 +267,9 @@ public class OvrAvatar : MonoBehaviour
         CAPI.ovrAvatar_GetCombinedMeshAlphaData(sdkAvatar, ref clothingAlphaTexture, ref clothingAlphaOffset);
 
         waitingForCombinedMesh = false;
+
+        //InvalidCastException fix. Further informaiton about the state of init.
+        initialized = true;
     }
 
     private OvrAvatarSkinnedMeshRenderComponent AddSkinnedMeshRenderComponent(GameObject gameObject, ovrAvatarRenderPart_SkinnedMeshRender skinnedMeshRender)

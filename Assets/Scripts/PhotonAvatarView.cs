@@ -41,6 +41,15 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         
     }
 
+    private bool notReadyForSerialization
+    {
+        get
+        {
+            return (!PhotonNetwork.InRoom || (PhotonNetwork.CurrentRoom.PlayerCount < 2) || 
+                !Oculus.Platform.Core.IsInitialized() || !ovrAvatar.initialized);
+        }
+    }
+
     public void OnDisable()
     {
         if (photonView.IsMine)
@@ -52,7 +61,7 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     public void OnLocalAvatarPacketRecorded(object sender, OvrAvatar.PacketEventArgs args)
     {
-        if (!PhotonNetwork.InRoom || (PhotonNetwork.CurrentRoom.PlayerCount < 2))
+        if (notReadyForSerialization)
         {
             return;
         }
@@ -75,6 +84,11 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     private void DeserializeAndQueuePacketData(byte[] data)
     {
+        if (notReadyForSerialization)
+        {
+            return;
+        }
+
         using (MemoryStream inputStream = new MemoryStream(data))
         {
             BinaryReader reader = new BinaryReader(inputStream);
