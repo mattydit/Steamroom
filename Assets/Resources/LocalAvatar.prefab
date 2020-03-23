@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6458119247689793653}
   - component: {fileID: 7269723182258142786}
   - component: {fileID: -3936059467520306308}
-  - component: {fileID: -7494441999000017924}
   m_Layer: 0
   m_Name: LocalAvatar
   m_TagString: Untagged
@@ -65,6 +64,7 @@ MonoBehaviour:
     layerIndex: 0
   ShowFirstPerson: 1
   ShowThirdPerson: 0
+  initialized: 0
   LevelOfDetail: 5
   UseTransparentRenderQueue: 1
   Monochrome_SurfaceShader: {fileID: 4800000, guid: 73f67c4e7bf718b4385aa6b1f8a06591,
@@ -143,7 +143,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -3936059467520306308}
-  - {fileID: -7494441999000017924}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -159,18 +158,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f8d40104dc28e4097bb8e50f307122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7494441999000017924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6450071406287158298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0

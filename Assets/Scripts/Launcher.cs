@@ -8,7 +8,7 @@ using ExitGames.Client.Photon;
 public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     [SerializeField]
-    private byte maxPlayersPerRoom = 4;
+    private byte maxPlayersPerRoom = 20;
 
     string gameVersion = "1";
 
