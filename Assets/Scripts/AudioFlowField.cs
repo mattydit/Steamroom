@@ -41,6 +41,7 @@ public class AudioFlowField : MonoBehaviour
     {
         audioSrc = audioPeer.GetComponent<AudioSource>();
         noiseFlowfield = GetComponent<NoiseFlowField>();
+        /*
         audioMat = new Material[8];
         colour1 = new Color[8];
         colour2 = new Color[8];
@@ -51,13 +52,14 @@ public class AudioFlowField : MonoBehaviour
             colour2[i] = gradient2.Evaluate((1f / 8f) * i);
             audioMat[i] = new Material(mat);
         }
+        */
 
         int countBand = 0;
 
         for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
         {
             int band = countBand % 8;
-            noiseFlowfield.particleMeshRenderer[i].material = audioMat[band];
+            //noiseFlowfield.particleMeshRenderer[i].material = audioMat[band];
             noiseFlowfield.particles[i].audioBand = band;
             countBand++;
         }
@@ -83,6 +85,7 @@ public class AudioFlowField : MonoBehaviour
                 }
             }
 
+            /*
             for (int i = 0; i < 8; i++)
             {
 
@@ -105,6 +108,7 @@ public class AudioFlowField : MonoBehaviour
                 }
 
             }
+            */
 
             //noiseFlowfield.cube.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
             //noiseFlowfield.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
