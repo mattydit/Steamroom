@@ -7,7 +7,11 @@ using ExitGames.Client.Photon;
 
 public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingCallbacks, IOnEventCallback
 {
-    public const byte InstantiateVrAvatarEventCode = 5;
+    public const byte InstantiateVrAvatarEventCode = 123;
+
+    string gameVersion = "1";
+
+    bool isConnecting;
 
     [SerializeField]
     private string roomName = "steamroomOculus";
@@ -25,7 +29,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        Connect();
     }
 
     // Update is called once per frame
@@ -36,47 +40,51 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
 
     public void OnConnected()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions(), TypedLobby.Default);
+        Debug.Log("Yurt");
+        if (isConnecting)
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
     }
 
     public void OnCustomAuthenticationFailed(string debugMessage)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnDisconnected(DisconnectCause cause)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnRegionListReceived(RegionHandler regionHandler)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnFriendListUpdate(List<FriendInfo> friendList)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnCreatedRoom()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnCreateRoomFailed(short returnCode, string message)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnJoinedRoom()
@@ -104,26 +112,43 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
 
     public void OnJoinRoomFailed(short returnCode, string message)
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnJoinRandomFailed(short returnCode, string message)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+
+        // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
+        PhotonNetwork.CreateRoom(null, new RoomOptions());
     }
 
     public void OnLeftRoom()
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnEvent(EventData photonEvent)
     {
         if (photonEvent.Code == InstantiateVrAvatarEventCode)
         {
-            GameObject remoteAvatar = Instantiate(Resources.Load("RemoveAvatar")) as GameObject;
+            GameObject remoteAvatar = Instantiate(Resources.Load("RemoteAvatar")) as GameObject;
             PhotonView photonView = remoteAvatar.GetComponent<PhotonView>();
             photonView.ViewID = (int)photonEvent.CustomData;
         }
     }
+
+    public void Connect()
+    {
+        isConnecting = true;
+
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
+        else
+        {
+            PhotonNetwork.GameVersion = gameVersion;
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+
 }

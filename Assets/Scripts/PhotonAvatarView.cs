@@ -16,9 +16,12 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     private int localSequence;
 
+    private bool initialized;
+
     // Start is called before the first frame update
     void Start()
     {
+        /*
         photonView = GetComponent<PhotonView>();
 
         if (photonView.IsMine)
@@ -33,6 +36,31 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         {
             remoteDriver = GetComponent<OvrAvatarRemoteDriver>();
         }
+        */
+    }
+
+    private void OnEnable()
+    {
+        if (this.initialized)
+        {
+            return;
+        }
+        photonView = GetComponent<PhotonView>();
+
+        if (photonView.IsMine)
+        {
+            ovrAvatar = GetComponent<OvrAvatar>();
+            //is.ovrAvatar.oculusUserID = this.photonView.Owner.UserId;
+            ovrAvatar.RecordPackets = true;
+            ovrAvatar.PacketRecorded += OnLocalAvatarPacketRecorded;
+
+            packetData = new List<byte[]>();
+        }
+        else
+        {
+            remoteDriver = GetComponent<OvrAvatarRemoteDriver>();
+        }
+        this.initialized = true;
     }
 
     // Update is called once per frame
@@ -46,7 +74,7 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         get
         {
             return (!PhotonNetwork.InRoom || (PhotonNetwork.CurrentRoom.PlayerCount < 2) || 
-                !Oculus.Platform.Core.IsInitialized() || !ovrAvatar.initialized);
+                !Oculus.Platform.Core.IsInitialized());
         }
     }
 

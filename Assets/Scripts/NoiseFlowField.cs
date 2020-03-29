@@ -24,6 +24,8 @@ public class NoiseFlowField : MonoBehaviour
 
     public GameObject cube;
 
+    //public ParticleSystem particleSystem;
+
     bool particleSpawnValidadtion(Vector3 position)
     {
         bool valid = true;
@@ -50,6 +52,7 @@ public class NoiseFlowField : MonoBehaviour
     void Awake()
     {
         //DrawCube();
+        //particleSystem = particlePrefab.GetComponentInChildren<ParticleSystem>();
 
         flowfieldDirection = new Vector3[gridSize.x, gridSize.y, gridSize.z];
         fn = new FastNoise();

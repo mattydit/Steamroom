@@ -67,7 +67,7 @@ public class OvrAvatar : MonoBehaviour
     public bool ShowThirdPerson;
     internal ovrAvatarCapabilities Capabilities = ovrAvatarCapabilities.Body;
 
-    public bool initialized = false;
+    public bool Initialized = true;
 
     [Header("Performance")]
 #if UNITY_ANDROID
@@ -269,7 +269,8 @@ public class OvrAvatar : MonoBehaviour
         waitingForCombinedMesh = false;
 
         //InvalidCastException fix. Further informaiton about the state of init.
-        initialized = true;
+        Initialized = true;
+        Debug.Log("OvrAvatar Initialized");
     }
 
     private OvrAvatarSkinnedMeshRenderComponent AddSkinnedMeshRenderComponent(GameObject gameObject, ovrAvatarRenderPart_SkinnedMeshRender skinnedMeshRender)

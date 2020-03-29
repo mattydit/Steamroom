@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6450071406276936462}
   - component: {fileID: 6458119247689793653}
   - component: {fileID: 7269723182258142786}
+  - component: {fileID: -3888000814986500683}
   - component: {fileID: -3936059467520306308}
   m_Layer: 0
   m_Name: LocalAvatar
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f3402a2ea5bff4880c0313515240cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oculusUserID: 10150022857785745
+  oculusUserID: 0
   Driver: {fileID: 6450071406276936462}
   EnableBody: 1
   EnableHands: 1
@@ -146,6 +147,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-3888000814986500683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450071406287158298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db16f340adc39e4a8bc498dc6f1b3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAvatar: {fileID: 6450071406276940670}
 --- !u!114 &-3936059467520306308
 MonoBehaviour:
   m_ObjectHideFlags: 0
