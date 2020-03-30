@@ -51,7 +51,7 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         {
             ovrAvatar = GetComponent<OvrAvatar>();
             //this.ovrAvatar.oculusUserID = this.photonView.Owner.UserId;
-            Debug.Log(this.photonView.Owner.UserId.ToString());
+            //Debug.Log(this.photonView.Owner.UserId.ToString());
             ovrAvatar.RecordPackets = true;
             ovrAvatar.PacketRecorded += OnLocalAvatarPacketRecorded;
 
