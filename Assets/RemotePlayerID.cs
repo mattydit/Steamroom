@@ -10,7 +10,7 @@ public class RemotePlayerID : MonoBehaviour
     public PhotonView photonView;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         remoteAvatar = GetComponent<OvrAvatar>();
         photonView = GetComponent<PhotonView>();
@@ -18,7 +18,7 @@ public class RemotePlayerID : MonoBehaviour
         oculusID = photonView.Owner.UserId;
         //Debug.Log("RemoteAvatar owner UserID = " + oculusID);
         remoteAvatar.oculusUserID = oculusID;
-        this.gameObject.SetActive(true);
+        
     }
 
     // Update is called once per frame
