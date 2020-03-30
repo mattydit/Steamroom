@@ -67,7 +67,7 @@ public class OvrAvatar : MonoBehaviour
     public bool ShowThirdPerson;
     internal ovrAvatarCapabilities Capabilities = ovrAvatarCapabilities.Body;
 
-    public bool Initialized = true;
+    public bool Initialized = false;
 
     [Header("Performance")]
 #if UNITY_ANDROID
