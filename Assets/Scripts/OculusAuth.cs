@@ -11,6 +11,7 @@ public class OculusAuth : MonoBehaviour
 
     private void Awake()
     {
+        myAvatar = GetComponent<OvrAvatar>();
         myAvatar.gameObject.SetActive(false);
         Core.AsyncInitialize().OnComplete(OnInitializationCallback);
     }
