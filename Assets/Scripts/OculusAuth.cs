@@ -2,17 +2,18 @@
 using Oculus.Platform;
 using Oculus.Platform.Models;
 using Photon.Realtime;
+using Photon.Pun;
 
 public class OculusAuth : MonoBehaviour
 {
-    public OvrAvatar myAvatar;
+    //public OvrAvatar myAvatar;
 
     private string oculusId;
 
     private void Awake()
     {
-        myAvatar = GetComponent<OvrAvatar>();
-        myAvatar.gameObject.SetActive(false);
+        //myAvatar = GetComponent<OvrAvatar>();
+        //myAvatar.gameObject.SetActive(false);
         Core.AsyncInitialize().OnComplete(OnInitializationCallback);
     }
 
@@ -63,10 +64,10 @@ public class OculusAuth : MonoBehaviour
         {
             oculusId = msg.Data.ID.ToString(); // do not use msg.Data.OculusID;
             Debug.Log(oculusId);
-            myAvatar.oculusUserID = oculusId;
-            myAvatar.gameObject.SetActive(true);
+            //myAvatar.oculusUserID = oculusId;
+            //myAvatar.gameObject.SetActive(true);
             GetUserProof();
-            Debug.Log("ovrAvatar initialized = " + myAvatar.Initialized);
+            //Debug.Log("ovrAvatar initialized = " + myAvatar.Initialized);
         }
     }
 
@@ -89,4 +90,5 @@ public class OculusAuth : MonoBehaviour
            
         }
     }
+
 }

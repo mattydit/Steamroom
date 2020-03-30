@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using Oculus.Platform;
+using Oculus.Platform.Models;
 
 public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingCallbacks, IOnEventCallback
 {
@@ -15,6 +17,91 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
 
     [SerializeField]
     private string roomName = "steamroomOculus";
+
+    private string oculusId;
+
+    private void Awake()
+    {
+        //myAvatar = GetComponent<OvrAvatar>();
+        //myAvatar.gameObject.SetActive(false);
+        Core.AsyncInitialize().OnComplete(OnInitializationCallback);
+    }
+
+    private void OnInitializationCallback(Message<PlatformInitialize> msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error during initialization. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            Entitlements.IsUserEntitledToApplication().OnComplete(OnIsEntitledCallback);
+        }
+    }
+
+    private void OnIsEntitledCallback(Message msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error verifying the user is entitled to the application. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            GetLoggedInUser();
+        }
+    }
+
+    private void GetLoggedInUser()
+    {
+        Users.GetLoggedInUser().OnComplete(OnLoggedInUserCallback);
+    }
+
+    private void OnLoggedInUserCallback(Message<User> msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error getting logged in user. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            oculusId = msg.Data.ID.ToString(); // do not use msg.Data.OculusID;
+            Debug.Log(oculusId);
+            //myAvatar.oculusUserID = oculusId;
+            //myAvatar.gameObject.SetActive(true);
+            GetUserProof();
+            //Debug.Log("ovrAvatar initialized = " + myAvatar.Initialized);
+        }
+    }
+
+    private void GetUserProof()
+    {
+        Users.GetUserProof().OnComplete(OnUserProofCallback);
+    }
+
+    private void OnUserProofCallback(Message<UserProof> msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error getting user proof. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            string oculusNonce = msg.Data.Value;
+            // Photon Authentication can be done here
+            PhotonNetwork.AuthValues = new AuthenticationValues();
+            PhotonNetwork.AuthValues.UserId = oculusId;
+            PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Oculus;
+            PhotonNetwork.AuthValues.AddAuthParameter("userid", oculusId);
+            PhotonNetwork.AuthValues.AddAuthParameter("nonce", oculusNonce);
+
+            Connect();
+            //Debug.Log(PhotonPlayer.)
+        }
+    }
 
     private void OnEnable()
     {
@@ -29,7 +116,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
     // Start is called before the first frame update
     void Start()
     {
-        Connect();
+        //Connect();
     }
 
     // Update is called once per frame
@@ -91,6 +178,9 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
     {
         GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
         PhotonView photonView = localAvatar.GetComponent<PhotonView>();
+        OvrAvatar ovrAvatarlocal = localAvatar.GetComponent<OvrAvatar>();
+
+        ovrAvatarlocal.oculusUserID = oculusId;
 
         if (PhotonNetwork.AllocateViewID(photonView))
         {
@@ -119,7 +209,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
         Debug.Log("Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        RoomOptions roomOptions = new RoomOptions();
+        Photon.Realtime.RoomOptions roomOptions = new Photon.Realtime.RoomOptions();
         roomOptions.PublishUserId = true;
         PhotonNetwork.CreateRoom(null, roomOptions);
     }
