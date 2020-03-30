@@ -16,7 +16,8 @@ public class RemotePlayerID : MonoBehaviour
         photonView = GetComponent<PhotonView>();
 
         oculusID = photonView.Owner.UserId;
-        Debug.Log("RemoteAvatar owner UserID = " + oculusID);
+        //Debug.Log("RemoteAvatar owner UserID = " + oculusID);
+        remoteAvatar.oculusUserID = oculusID;
     }
 
     // Update is called once per frame
