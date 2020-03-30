@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 11461908}
   - component: {fileID: -8050550232439026269}
   - component: {fileID: 1000107275092284641}
+  - component: {fileID: -8192412790903892889}
+  - component: {fileID: -2568909888159847534}
   m_Layer: 0
   m_Name: RemoteAvatar
   m_TagString: Untagged
@@ -63,7 +65,7 @@ MonoBehaviour:
     layerIndex: 0
   ShowFirstPerson: 0
   ShowThirdPerson: 1
-  initialized: 0
+  Initialized: 1
   LevelOfDetail: 3
   UseTransparentRenderQueue: 1
   Monochrome_SurfaceShader: {fileID: 4800000, guid: 73f67c4e7bf718b4385aa6b1f8a06591,
@@ -127,6 +129,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1000107275092284641}
+  - {fileID: -8192412790903892889}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -140,5 +143,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f8d40104dc28e4097bb8e50f307122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8192412790903892889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+--- !u!114 &-2568909888159847534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9faded8685a1b1a44bbc008588a18c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
