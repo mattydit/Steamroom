@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Oculus.Avatar;
 using System.IO;
+using Oculus.Platform;
 
 public class PhotonAvatarView : MonoBehaviour, IPunObservable
 {
