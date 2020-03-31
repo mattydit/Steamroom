@@ -20,6 +20,8 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
 
     private string oculusId;
 
+
+
     private void Awake()
     {
         //myAvatar = GetComponent<OvrAvatar>();
@@ -46,6 +48,8 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
         {
             Debug.LogErrorFormat("Oculus: Error verifying the user is entitled to the application. Error Message: {0}",
                 msg.GetError().Message);
+
+            Connect();
         }
         else
         {
@@ -92,14 +96,18 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
         {
             string oculusNonce = msg.Data.Value;
             // Photon Authentication can be done here
-            PhotonNetwork.AuthValues = new AuthenticationValues();
-            PhotonNetwork.AuthValues.UserId = oculusId;
-            PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Oculus;
-            PhotonNetwork.AuthValues.AddAuthParameter("userid", oculusId);
-            PhotonNetwork.AuthValues.AddAuthParameter("nonce", oculusNonce);
 
-            Connect();
-            //Debug.Log(PhotonPlayer.)
+            if (oculusNonce != null)
+            {
+                PhotonNetwork.AuthValues = new AuthenticationValues();
+                PhotonNetwork.AuthValues.UserId = oculusId;
+                PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Oculus;
+                PhotonNetwork.AuthValues.AddAuthParameter("userid", oculusId);
+                PhotonNetwork.AuthValues.AddAuthParameter("nonce", oculusNonce);
+
+                Connect();
+            }
+            
         }
     }
 
