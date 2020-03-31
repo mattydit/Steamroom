@@ -16,12 +16,11 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     private int localSequence;
 
-    private bool initialized;
+    //private bool initialized;
 
     // Start is called before the first frame update
     void Start()
     {
-        /*
         photonView = GetComponent<PhotonView>();
 
         if (photonView.IsMine)
@@ -36,9 +35,9 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         {
             remoteDriver = GetComponent<OvrAvatarRemoteDriver>();
         }
-        */
     }
 
+    /*
     private void OnEnable()
     {
         if (this.initialized)
@@ -63,6 +62,7 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         }
         this.initialized = true;
     }
+    */
 
     // Update is called once per frame
     void Update()
