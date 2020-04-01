@@ -54,7 +54,7 @@ MonoBehaviour:
   EnableBase: 0
   EnableExpressive: 1
   RecordPackets: 0
-  UseSDKPackets: 1
+  UseSDKPackets: 0
   PacketSettings:
     UpdateRate: 0.033333335
   StartWithControllers: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     layerIndex: 0
   ShowFirstPerson: 0
   ShowThirdPerson: 1
-  Initialized: 1
+  Initialized: 0
   LevelOfDetail: 3
   UseTransparentRenderQueue: 1
   Monochrome_SurfaceShader: {fileID: 4800000, guid: 73f67c4e7bf718b4385aa6b1f8a06591,
