@@ -141,11 +141,6 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (notReadyForSerialization)
-        {
-            return;
-        }
-
         if (stream.IsWriting)
         {
             if (packetData.Count == 0)
@@ -165,13 +160,16 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
         if (stream.IsReading)
         {
-            int num = (int)stream.ReceiveNext();
-
-            for (int counter = 0; counter < num; ++counter)
+            if (stream.PeekNext() is int nextVal)
             {
-                byte[] data = (byte[])stream.ReceiveNext();
+                int num = (int)stream.ReceiveNext();
 
-                DeserializeAndQueuePacketData(data);
+                for (int counter = 0; counter < num; ++counter)
+                {
+                    byte[] data = (byte[])stream.ReceiveNext();
+
+                    DeserializeAndQueuePacketData(data);
+                }
             }
         }
     }

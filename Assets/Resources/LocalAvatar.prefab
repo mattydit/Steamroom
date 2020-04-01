@@ -55,7 +55,7 @@ MonoBehaviour:
   EnableBase: 0
   EnableExpressive: 1
   RecordPackets: 0
-  UseSDKPackets: 0
+  UseSDKPackets: 1
   PacketSettings:
     UpdateRate: 0.033333335
   StartWithControllers: 0

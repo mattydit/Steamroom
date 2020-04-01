@@ -228,7 +228,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             PhotonView photonView = remoteAvatar.GetComponent<PhotonView>();
             OvrAvatar ovrAvatarRemote = remoteAvatar.GetComponent<OvrAvatar>();
             photonView.ViewID = (int)photonEvent.CustomData;
-            ovrAvatarRemote.oculusUserID = photonView.Owner.UserId;
+            //ovrAvatarRemote.oculusUserID = photonView.Owner.UserId;
         }
     }
 

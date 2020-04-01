@@ -665,6 +665,8 @@ public class OvrAvatar : MonoBehaviour
         {
             Driver.Mode = UseSDKPackets ? OvrAvatarDriver.PacketMode.SDK : OvrAvatarDriver.PacketMode.Unity;
         }
+
+        Initialized = true;
     }
 
     void Update()
