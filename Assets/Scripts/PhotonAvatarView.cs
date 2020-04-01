@@ -19,6 +19,15 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     //private bool initialized;
 
+    private bool notReadyForSerialization
+    {
+        get
+        {
+            return (!PhotonNetwork.InRoom || (PhotonNetwork.CurrentRoom.PlayerCount < 2) ||
+                    !Oculus.Platform.Core.IsInitialized() || !ovrAvatar.Initialized);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,15 +80,6 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
         
     }
 
-    private bool notReadyForSerialization
-    {
-        get
-        {
-            return (!PhotonNetwork.InRoom || (PhotonNetwork.CurrentRoom.PlayerCount < 2) || 
-                !Oculus.Platform.Core.IsInitialized() || !ovrAvatar.Initialized);
-        }
-    }
-
     public void OnDisable()
     {
         if (photonView.IsMine)
@@ -91,10 +91,12 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     public void OnLocalAvatarPacketRecorded(object sender, OvrAvatar.PacketEventArgs args)
     {
+        
         if (notReadyForSerialization)
         {
             return;
         }
+        
 
         using (MemoryStream outputStream = new MemoryStream())
         {
@@ -114,10 +116,12 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     private void DeserializeAndQueuePacketData(byte[] data)
     {
+        /*
         if (notReadyForSerialization)
         {
             return;
         }
+        */
 
         using (MemoryStream inputStream = new MemoryStream(data))
         {
@@ -137,10 +141,6 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (notReadyForSerialization)
-        {
-            return;
-        }
 
         if (stream.IsWriting)
         {
