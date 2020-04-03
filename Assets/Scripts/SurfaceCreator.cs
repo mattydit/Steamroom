@@ -75,10 +75,11 @@ public class SurfaceCreator : MonoBehaviour
                 {
                     sample = sample * 0.5f + 0.5f;
                 }
+                vertices[v].z = sample;
                 colours[v] = colouring.Evaluate(sample);
             }
         }
-
+        mesh.vertices = vertices;
         mesh.colors = colours;
         
     }
