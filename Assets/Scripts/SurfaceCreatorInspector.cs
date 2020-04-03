@@ -1,18 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class SurfaceCreatorInspector : MonoBehaviour
+[CustomEditor(typeof(SurfaceCreator))]
+public class SurfaceCreatorInspector : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+    private SurfaceCreator creator;
+
+    private void OnEnable()
     {
-        
+        creator = target as SurfaceCreator;
+        Undo.undoRedoPerformed += RefreshCreator;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        Undo.undoRedoPerformed -= RefreshCreator;
+    }
+
+    private void RefreshCreator()
+    {
+        if (Application.isPlaying)
+        {
+            creator.Refresh();
+        }
+    }
+
+    public override void OnInspectorGUI()
+    {
+        EditorGUI.BeginChangeCheck();
+        DrawDefaultInspector();
+        if (EditorGUI.EndChangeCheck())
+        {
+            RefreshCreator();
+        }
     }
 }
