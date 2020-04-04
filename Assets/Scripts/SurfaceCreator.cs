@@ -7,6 +7,9 @@ public class SurfaceCreator : MonoBehaviour
 {
     private Mesh mesh;
 
+    [Range(0f, 1f)]
+    public float strength = 1f;
+
     [Range(1, 200)]
     public int resolution = 10;
 
@@ -26,6 +29,8 @@ public class SurfaceCreator : MonoBehaviour
 
     public NoiseMethodType type;
     public Gradient colouring;
+    public bool colouringforStrength;
+    public bool damping;
     public Vector3 offset;
     public Vector3 rotation;
 
@@ -61,6 +66,8 @@ public class SurfaceCreator : MonoBehaviour
         NoiseMethod method = Noise.methods[(int)type][dimensions - 1];
         float stepSize = 1f / resolution;
 
+        float amplitude = damping ? strength / frequency : strength;
+
         for (int v = 0, y = 0; y <= resolution; y++)
         {
             Vector3 point0 = Vector3.Lerp(point00, point01, y * stepSize);
@@ -70,18 +77,33 @@ public class SurfaceCreator : MonoBehaviour
             {
                 Vector3 point = Vector3.Lerp(point0, point1, x * stepSize);
                 float sample = Noise.Sum(method, point, frequency, octaves, lacunarity, persistence);
+                sample = type == NoiseMethodType.Value ? (sample - 0.5f) : (sample * 0.5f);
+
+                if (colouringforStrength)
+                {
+                    colours[v] = colouring.Evaluate(sample + 0.5f);
+                    sample *= amplitude;
+                }
+                else
+                {
+                    //scale sample after -1/2 - 1/2 range
+                    sample *= amplitude;
+                    colours[v] = colouring.Evaluate(sample + 0.5f);
+                }
 
                 if (type != NoiseMethodType.Value)
                 {
                     sample = sample * 0.5f + 0.5f;
                 }
-                vertices[v].z = sample;
-                colours[v] = colouring.Evaluate(sample);
+                vertices[v].y = sample;
+               
             }
         }
         mesh.vertices = vertices;
         mesh.colors = colours;
-        
+        mesh.RecalculateNormals();
+        DestroyImmediate(this.GetComponent<MeshCollider>());
+        this.gameObject.AddComponent<MeshCollider>();
     }
 
     private void CreateGrid()
@@ -95,13 +117,13 @@ public class SurfaceCreator : MonoBehaviour
         colours = new Color[vertices.Length];
         float stepSize = 1f / resolution;
 
-        for (int v = 0, y = 0; y <= resolution; y++)
+        for (int v = 0, z = 0; z <= resolution; z++)
         {
             for (int x = 0; x <= resolution; x++, v++)
             {
-                vertices[v] = new Vector3(x * stepSize - 0.5f, y * stepSize - 0.5f);
-                normals[v] = Vector3.back;
-                uvs[v] = new Vector2(x * stepSize, y * stepSize);
+                vertices[v] = new Vector3(x * stepSize - 0.5f, 0f, z * stepSize - 0.5f);
+                normals[v] = Vector3.up;
+                uvs[v] = new Vector2(x * stepSize, z * stepSize);
                 colours[v] = Color.black;
             }
         }
