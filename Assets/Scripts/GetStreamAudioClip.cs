@@ -8,12 +8,14 @@ public class GetStreamAudioClip : MonoBehaviour
     public GameObject speaker;
     public AudioPeer audioPeer;
     public AudioSource localAudioSrc;
+    public StreamAudio streamAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         audioPeer = GetComponent<AudioPeer>();
         localAudioSrc = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -33,8 +35,13 @@ public class GetStreamAudioClip : MonoBehaviour
             if (streamAudioSrc.isPlaying == true && localAudioSrc.clip == null)
             {
                 localAudioSrc.clip = streamAudioSrc.clip;
-                streamAudioSrc.mute = true;
+                //localAudioSrc.mute = true;
                 audioPeer.audioSwitchedOn = true;
+
+                if (streamAudio.isStreaming == false)
+                {
+                    localAudioSrc.mute = true;
+                }
             }
         }
        
