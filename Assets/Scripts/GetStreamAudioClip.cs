@@ -33,7 +33,7 @@ public class GetStreamAudioClip : MonoBehaviour
             if (streamAudioSrc.isPlaying == true && localAudioSrc.clip == null)
             {
                 localAudioSrc.clip = streamAudioSrc.clip;
-                localAudioSrc.volume = 0;
+                streamAudioSrc.mute = true;
             }
         }
        

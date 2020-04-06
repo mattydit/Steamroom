@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             this.transform.localPosition = Vector3.zero;
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
