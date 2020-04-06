@@ -494,6 +494,7 @@ namespace Photon.Voice.Unity
             speaker.Actor = (this.Client.CurrentRoom != null) ? this.Client.CurrentRoom.GetPlayer(playerId) : null;
             speaker.name = speaker.Actor != null && !string.IsNullOrEmpty(speaker.Actor.NickName) ? speaker.Actor.NickName : String.Format("Speaker for Player {0} Voice #{1}", playerId, voiceId);
             speaker.OnRemoteVoiceRemoveAction += DeleteVoiceOnRemoteVoiceRemove;
+            speaker.tag = "speaker";
             return speaker;
         }
 

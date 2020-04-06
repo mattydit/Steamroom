@@ -6,6 +6,7 @@ using Photon.Voice.Unity;
 public class StreamAudio : MonoBehaviour
 {
     public Recorder recorder;
+    public bool isStreaming;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class StreamAudio : MonoBehaviour
         {
             recorder.RestartRecording();
             recorder.TransmitEnabled = true;
+            isStreaming = true;
         }
     }
 }

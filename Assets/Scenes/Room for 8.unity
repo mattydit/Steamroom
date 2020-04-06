@@ -1655,6 +1655,7 @@ GameObject:
   - component: {fileID: 1664188195}
   - component: {fileID: 1664188191}
   - component: {fileID: 1664188190}
+  - component: {fileID: 1664188192}
   m_Layer: 0
   m_Name: AudioPeer
   m_TagString: Untagged
@@ -1803,6 +1804,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1664188192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664188189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a456e1a8b4c7774a9bc4645bb2a5da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streamAudioSrc: {fileID: 0}
+  audioStream: {fileID: 0}
+  speaker: {fileID: 0}
+  audioPeer: {fileID: 0}
 --- !u!4 &1664188195
 Transform:
   m_ObjectHideFlags: 0
@@ -2064,6 +2081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recorder: {fileID: 0}
+  isStreaming: 0
 --- !u!1 &1915175487
 GameObject:
   m_ObjectHideFlags: 0
