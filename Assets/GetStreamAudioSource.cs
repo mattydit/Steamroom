@@ -13,12 +13,17 @@ public class GetStreamAudioSource : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speaker = GameObject.FindGameObjectWithTag("speaker");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (speaker == null)
+        {
+            speaker = GameObject.FindGameObjectWithTag("speaker");
+        }
+
         if (audioStream.isStreaming == true)
         {
             streamAudioSrc = speaker.GetComponent<AudioSource>();

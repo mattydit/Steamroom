@@ -1817,9 +1817,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   streamAudioSrc: {fileID: 0}
-  audioStream: {fileID: 0}
+  audioStream: {fileID: 1807472372}
   speaker: {fileID: 0}
-  audioPeer: {fileID: 0}
+  audioPeer: {fileID: 1664188190}
 --- !u!4 &1664188195
 Transform:
   m_ObjectHideFlags: 0
