@@ -19,6 +19,7 @@ public class StreamAudio : MonoBehaviour
     {
         if (recorder.IsRecording && recorder.AudioClip != null)
         {
+            recorder.RestartRecording();
             recorder.TransmitEnabled = true;
         }
     }
