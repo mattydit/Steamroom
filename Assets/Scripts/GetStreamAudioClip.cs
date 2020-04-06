@@ -34,6 +34,7 @@ public class GetStreamAudioClip : MonoBehaviour
             {
                 localAudioSrc.clip = streamAudioSrc.clip;
                 streamAudioSrc.mute = true;
+                audioPeer.audioSwitchedOn = true;
             }
         }
        
