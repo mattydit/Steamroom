@@ -1727,6 +1727,7 @@ MonoBehaviour:
   speaker: {fileID: 0}
   audioPeer: {fileID: 0}
   localAudioSrc: {fileID: 0}
+  streamAudio: {fileID: 1807472372}
 --- !u!4 &1664188195
 Transform:
   m_ObjectHideFlags: 0

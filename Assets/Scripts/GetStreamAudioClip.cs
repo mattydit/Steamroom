@@ -34,7 +34,7 @@ public class GetStreamAudioClip : MonoBehaviour
         {
             if (streamAudioSrc.isPlaying == true && localAudioSrc.clip == null)
             {
-                localAudioSrc.clip = streamAudioSrc.clip;
+                audioPeer.audioClip = streamAudioSrc.clip;
                 //localAudioSrc.mute = true;
                 audioPeer.audioSwitchedOn = true;
 
