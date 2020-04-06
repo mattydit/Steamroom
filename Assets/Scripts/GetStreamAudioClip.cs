@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Voice.PUN;
 
-public class GetStreamAudioSource : MonoBehaviour
+public class GetStreamAudioClip : MonoBehaviour
 {
     public AudioSource streamAudioSrc;
     public GameObject speaker;
     public AudioPeer audioPeer;
+    public AudioSource localAudioSrc;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioPeer = GetComponent<AudioPeer>();
+        localAudioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,15 +22,13 @@ public class GetStreamAudioSource : MonoBehaviour
         if (speaker == null)
         {
             speaker = GameObject.FindGameObjectWithTag("speaker");
+            streamAudioSrc = speaker.GetComponent<AudioSource>();
         }
 
-        
-        if (speaker.GetComponent<AudioSource>().isPlaying == true && streamAudioSrc == null)
+        if (streamAudioSrc.isPlaying == true && localAudioSrc.clip == null)
         {
-            streamAudioSrc = speaker.GetComponent<AudioSource>();
-            audioPeer.audioSrc = streamAudioSrc;
+            localAudioSrc.clip = streamAudioSrc.clip;
+            localAudioSrc.volume = 0;
         }
-        
-        
     }
 }
