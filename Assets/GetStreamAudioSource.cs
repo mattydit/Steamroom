@@ -6,7 +6,6 @@ using Photon.Voice.PUN;
 public class GetStreamAudioSource : MonoBehaviour
 {
     public AudioSource streamAudioSrc;
-    public StreamAudio audioStream;
     public GameObject speaker;
     public AudioPeer audioPeer;
 
@@ -24,10 +23,13 @@ public class GetStreamAudioSource : MonoBehaviour
             speaker = GameObject.FindGameObjectWithTag("speaker");
         }
 
-        if (audioStream.isStreaming == true)
+        
+        if (speaker.GetComponent<AudioSource>().isPlaying == true && streamAudioSrc == null)
         {
             streamAudioSrc = speaker.GetComponent<AudioSource>();
             audioPeer.audioSrc = streamAudioSrc;
         }
+        
+        
     }
 }
