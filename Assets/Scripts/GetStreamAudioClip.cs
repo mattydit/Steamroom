@@ -22,13 +22,20 @@ public class GetStreamAudioClip : MonoBehaviour
         if (speaker == null)
         {
             speaker = GameObject.FindGameObjectWithTag("speaker");
-            streamAudioSrc = speaker.GetComponent<AudioSource>();
+            if (speaker != null)
+            {
+                streamAudioSrc = speaker.GetComponent<AudioSource>();
+            }
         }
 
-        if (streamAudioSrc.isPlaying == true && localAudioSrc.clip == null)
+        if (speaker != null)
         {
-            localAudioSrc.clip = streamAudioSrc.clip;
-            localAudioSrc.volume = 0;
+            if (streamAudioSrc.isPlaying == true && localAudioSrc.clip == null)
+            {
+                localAudioSrc.clip = streamAudioSrc.clip;
+                localAudioSrc.volume = 0;
+            }
         }
+       
     }
 }
