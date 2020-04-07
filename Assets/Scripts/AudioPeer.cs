@@ -36,7 +36,7 @@ public class AudioPeer : MonoBehaviour
     public GameObject fileBrowserPrefab;
     public string[] fileExtensions;
 
-    
+    public bool localAudioPlaying;
 
     // Start is called before the first frame update
 
@@ -78,6 +78,7 @@ public class AudioPeer : MonoBehaviour
         {
             audioSrc.clip = audioClip;
             audioSrc.Play();
+            //localAudioPlaying = true;
         }
         else if (audioSwitchedOn == false && audioSrc.isPlaying == true)
         {
@@ -232,5 +233,6 @@ public class AudioPeer : MonoBehaviour
         StartCoroutine(GetAudioClip());
 
         audioSwitchedOn = true;
+        localAudioPlaying = true;
     }
 }
