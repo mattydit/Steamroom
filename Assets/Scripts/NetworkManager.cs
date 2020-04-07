@@ -19,7 +19,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
     private string roomName = "steamroomOculus";
 
     private string oculusId;
-
+    private string username;
 
 
     private void Awake()
@@ -71,6 +71,8 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
         {
             oculusId = msg.Data.ID.ToString(); // do not use msg.Data.OculusID;
             Debug.Log(oculusId);
+            Debug.Log(msg.Data.OculusID);
+            username = msg.Data.OculusID;
             //myAvatar.oculusUserID = oculusId;
             //myAvatar.gameObject.SetActive(true);
             GetUserProof();
@@ -100,6 +102,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Oculus;
             PhotonNetwork.AuthValues.AddAuthParameter("userid", oculusId);
             PhotonNetwork.AuthValues.AddAuthParameter("nonce", oculusNonce);
+            PhotonNetwork.NickName = username;
 
             Connect();
         }
@@ -183,6 +186,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
         OvrAvatar ovrAvatarlocal = localAvatar.GetComponent<OvrAvatar>();
 
         ovrAvatarlocal.oculusUserID = oculusId;
+        Debug.Log(Users.GetLoggedInUser().ToString());
 
         if (PhotonNetwork.AllocateViewID(photonView))
         {
@@ -227,10 +231,10 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             GameObject remoteAvatar = Instantiate(Resources.Load("RemoteAvatar")) as GameObject;
             PhotonView photonView = remoteAvatar.GetComponent<PhotonView>();
             OvrAvatar ovrAvatarRemote = remoteAvatar.GetComponent<OvrAvatar>();
-            
+            TMPro.TextMeshPro playername = remoteAvatar.GetComponent<TMPro.TextMeshPro>();
             photonView.ViewID = (int)photonEvent.CustomData;
             ovrAvatarRemote.oculusUserID = photonView.Owner.UserId;
-            
+            playername.text = photonView.Owner.NickName;
         }
     }
 
