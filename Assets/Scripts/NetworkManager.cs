@@ -234,7 +234,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             TMPro.TextMeshPro playername = remoteAvatar.GetComponent<TMPro.TextMeshPro>();
             photonView.ViewID = (int)photonEvent.CustomData;
             ovrAvatarRemote.oculusUserID = photonView.Owner.UserId;
-            playername.text = photonView.Owner.NickName;
+            playername.SetText(photonView.Owner.NickName);
         }
     }
 
