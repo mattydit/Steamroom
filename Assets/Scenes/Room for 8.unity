@@ -1589,6 +1589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recorder: {fileID: 0}
   isStreaming: 0
+  voiceConnection: {fileID: 1807472369}
 --- !u!114 &1680846405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2093,6 +2094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recorder: {fileID: 0}
   isStreaming: 0
+  voiceConnection: {fileID: 0}
 --- !u!1 &1915175487
 GameObject:
   m_ObjectHideFlags: 0

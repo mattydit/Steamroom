@@ -7,11 +7,13 @@ public class StreamAudio : MonoBehaviour
 {
     public Recorder recorder;
     public bool isStreaming;
+    public VoiceConnection voiceConnection;
 
     // Start is called before the first frame update
     void Start()
     {
         recorder = GetComponent<Recorder>();
+        recorder.Init(voiceConnection);
 
     }
 
