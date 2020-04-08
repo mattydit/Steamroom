@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Voice.PUN;
 
 public class GetStreamAudioClip : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GetStreamAudioClip : MonoBehaviour
     public AudioSource localAudioSrc;
     public StreamAudio streamAudio;
     public bool isMyAudioFile;
+    
 
     // Start is called before the first frame update
     void Start()

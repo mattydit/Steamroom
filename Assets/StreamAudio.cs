@@ -14,7 +14,6 @@ public class StreamAudio : MonoBehaviour
     {
         recorder = GetComponent<Recorder>();
         recorder.Init(voiceConnection);
-
     }
 
     // Update is called once per frame
