@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class SurfaceCreator : MonoBehaviour
+public class TerrainCreator : MonoBehaviour
 {
     private Mesh mesh;
 

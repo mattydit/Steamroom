@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SurfaceCreator))]
-public class SurfaceCreatorInspector : Editor
+[CustomEditor(typeof(TerrainCreator))]
+public class TerrainCreatorInspector : Editor
 {
-    private SurfaceCreator creator;
+    private TerrainCreator creator;
 
     private void OnEnable()
     {
-        creator = target as SurfaceCreator;
+        creator = target as TerrainCreator;
         Undo.undoRedoPerformed += RefreshCreator;
     }
 
