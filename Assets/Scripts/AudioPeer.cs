@@ -203,6 +203,7 @@ public class AudioPeer : MonoBehaviour
             else
             {
                 audioClip = DownloadHandlerAudioClip.GetContent(www);
+                StartCoroutine(WaitAndStop(audioClip));
             }
         }
 
@@ -234,5 +235,12 @@ public class AudioPeer : MonoBehaviour
 
         audioSwitchedOn = true;
         localAudioPlaying = true;
+    }
+
+    IEnumerator WaitAndStop(AudioClip audioClip)
+    {
+        yield return new WaitForSeconds(audioClip.length);
+        audioSwitchedOn = false;
+        audioSrc.Stop();
     }
 }
