@@ -73,10 +73,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             Debug.Log(oculusId);
             Debug.Log(msg.Data.OculusID);
             username = msg.Data.OculusID;
-            //myAvatar.oculusUserID = oculusId;
-            //myAvatar.gameObject.SetActive(true);
             GetUserProof();
-            //Debug.Log("ovrAvatar initialized = " + myAvatar.Initialized);
         }
     }
 

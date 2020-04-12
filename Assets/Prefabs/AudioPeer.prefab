@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6305508294742371675}
   - component: {fileID: 6305508294742371687}
   - component: {fileID: 6305508294742371686}
-  - component: {fileID: 6305508294742371672}
   m_Layer: 0
   m_Name: AudioPeer
   m_TagString: Untagged
@@ -175,21 +174,3 @@ MonoBehaviour:
   fileExtensions:
   - wav
   localAudioPlaying: 0
---- !u!114 &6305508294742371672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6305508294742371685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e190da64e04b6d4eaa5cef42d3262e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  streamAudioSrc: {fileID: 0}
-  speaker: {fileID: 0}
-  audioPeer: {fileID: 0}
-  localAudioSrc: {fileID: 0}
-  streamAudio: {fileID: 0}
-  isMyAudioFile: 0

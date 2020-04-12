@@ -51,8 +51,6 @@ public class NoiseFlowField : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //DrawCube();
-        //particleSystem = particlePrefab.GetComponentInChildren<ParticleSystem>();
 
         flowfieldDirection = new Vector3[gridSize.x, gridSize.y, gridSize.z];
         fn = new FastNoise();

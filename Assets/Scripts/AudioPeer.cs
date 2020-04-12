@@ -14,14 +14,12 @@ public class AudioPeer : MonoBehaviour
 
     public string[] audioFiles;
     string file; //= "file://D:/Music/Madvillain - Raid feat. MED.wav";
-    public static float[] samples = new float[512];
-    public static float[] freqBands = new float[8];
-    public static float[] bandBuffer = new float[8];
-    float[] bufferDecrease = new float[8];
+    public static float[] bandBuffer;
+    float[] bufferDecrease;
 
-    float[] freqBandHighest = new float[8];
-    public float[] audioBand = new float[8];
-    public float[] audioBandBuffer = new float[8];
+    float[] freqBandHighest;
+    public float[] audioBand;
+    public float[] audioBandBuffer;
 
     public float amplitude, amplitudeBuffer;
     float amplitudeHighest;
@@ -38,11 +36,30 @@ public class AudioPeer : MonoBehaviour
 
     public bool localAudioPlaying;
 
-    // Start is called before the first frame update
+    public static int frameSize = 512;
+    public static float[] spectrum;
+    public static float[] bands;
 
+    public float binWidth;
+    public float sampleRate;
+
+    private void Awake()
+    {
+        int logFrameSize = (int)Mathf.Log(frameSize, 2);
+        spectrum = new float[frameSize];
+        bands = new float[logFrameSize];
+        freqBandHighest = new float[logFrameSize];
+        audioBand = new float[logFrameSize];
+        audioBandBuffer = new float[logFrameSize];
+        bandBuffer = new float[logFrameSize];
+        bufferDecrease = new float[logFrameSize];
+    }
+
+    // Start is called before the first frame update
     void Start()
     {
-        
+        sampleRate = AudioSettings.outputSampleRate;
+        binWidth = AudioSettings.outputSampleRate / 2 / frameSize;
         audioSrc = GetComponent<AudioSource>();
 
         //Microphone input
@@ -86,7 +103,7 @@ public class AudioPeer : MonoBehaviour
         }
 
         GetSpectrumAudioSource();
-        MakeFrequencyBands();
+        GetFrequencyBands();
         BandBuffer();
         CreateAudioBands();
         GetAmplitude();
@@ -94,61 +111,40 @@ public class AudioPeer : MonoBehaviour
 
     void GetSpectrumAudioSource()
     {
-        audioSrc.GetSpectrumData(samples, 0, FFTWindow.Blackman);
+        audioSrc.GetSpectrumData(spectrum, 0, FFTWindow.Blackman);
     }
 
-    void MakeFrequencyBands()
+
+    void GetFrequencyBands()
     {
-        //22050 / 512 = 43 hz per sample
-        //20-60hz, 250-500hz, 500-2000hz, 2000-4000hz, 4000-6000hz, 6000-20000hz
-
-        /*
-         * 0 - 2 = 86hz
-         * 1 - 4 = 172hz    87-258
-         * 2 - 8 = 344hz    259-602
-         * 3 - 16 = 688hz   603-1290
-         * 4 - 32 = 1376hz  1291-2666
-         * 5 - 64 = 2752hz  2667-5418
-         * 6 - 128 = 5504   5419-10922 
-         * 7 - 256 = 11008  10923-21930
-         * = 510
-         */
-
-        int counter = 0;
-        
-        for(int i = 0; i < 8; i++)
+        for (int i = 0; i < bands.Length; i++)
         {
+            int start = (int)Mathf.Pow(2, i) - 1;
+            int width = (int)Mathf.Pow(2, i);
+            int end = start + width;
             float average = 0;
-            int sampleCount = (int)Mathf.Pow(2, i) * 2;
 
-            if(i == 7)
+            for (int j = start; j < end; j++)
             {
-                sampleCount += 2;
+                average += spectrum[j] * (j + 1);
             }
 
-            for(int j = 0; j < sampleCount; j++)
-            {
-                average += samples[counter] * (counter + 1);
-                counter++;
-            }
-
-            average /= counter;
-            freqBands[i] = average * 10;
-          
+            average /= (float)width;
+            bands[i] = average;
         }
 
     }
 
     void BandBuffer()
     {
-        for(int g = 0; g < 8; g++)
+        for(int g = 0; g < bands.Length; g++)
         {
-            if(freqBands[g] > bandBuffer[g])
+            if(bands[g] > bandBuffer[g])
             {
-                bandBuffer[g] = freqBands[g];
+                bandBuffer[g] = bands[g];
                 bufferDecrease[g] = 0.005f;
             }
-            if (freqBands[g] < bandBuffer[g])
+            if (bands[g] < bandBuffer[g])
             {
                 bandBuffer[g] -= bufferDecrease[g];
                 bufferDecrease[g] *= 1.2f;
@@ -158,14 +154,14 @@ public class AudioPeer : MonoBehaviour
 
     void CreateAudioBands()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < bands.Length; i++)
         {
-            if (freqBands[i] > freqBandHighest[i])
+            if (bands[i] > freqBandHighest[i])
             {
-                freqBandHighest[i] = freqBands[i];
+                freqBandHighest[i] = bands[i];
 
             }
-            audioBand[i] = (freqBands[i] / freqBandHighest[i]);
+            audioBand[i] = (bands[i] / freqBandHighest[i]);
             audioBandBuffer[i] = (bandBuffer[i] / freqBandHighest[i]);
         }
     }
@@ -175,7 +171,7 @@ public class AudioPeer : MonoBehaviour
         float currentAmplitude = 0;
         float currentAmplitudeBuffer = 0;
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < bands.Length; i++)
         {
             currentAmplitude += audioBand[i];
             currentAmplitudeBuffer += audioBandBuffer[i];
@@ -242,5 +238,8 @@ public class AudioPeer : MonoBehaviour
         yield return new WaitForSeconds(audioClip.length);
         audioSwitchedOn = false;
         audioSrc.Stop();
+        audioSrc.clip = null;
+        audioClip = null;
+        
     }
 }
