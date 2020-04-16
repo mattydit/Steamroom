@@ -27,11 +27,19 @@ public class VisualManager : MonoBehaviour
             flowField.SetActive(false);
         }
 
-        if (audioPeer.GetComponent<AudioSource>().isPlaying == false && speaker.GetComponent<AudioSource>().isPlaying == true)
+        if (speaker != null)
         {
-            audioPeer = speaker;
-            flowField.SetActive(true);
+            if (audioPeer.GetComponent<AudioSource>().isPlaying == false && speaker.GetComponent<AudioSource>().isPlaying == true)
+            {
+                audioPeer = speaker;
+                flowField.SetActive(true);
+            }
         }
+        else if (speaker == null)
+        {
+            speaker = GameObject.FindGameObjectWithTag("speaker");
+        }
+       
 
     }
 }
