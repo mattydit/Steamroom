@@ -7,39 +7,51 @@ public class VisualManager : MonoBehaviour
     public GameObject audioPeer;
     public GameObject flowField;
     public GameObject speaker;
-
+    public GameObject NoiseFlowField;
+    public bool usingSpeaker;
 
     // Start is called before the first frame update
     void Start()
     {
-        speaker = GameObject.FindGameObjectWithTag("speaker");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        FindSpeakers();
+
         if (audioPeer.GetComponent<AudioSource>().isPlaying)
         {
             flowField.SetActive(true);
+            usingSpeaker = false;
+        }
+        else if (audioPeer.GetComponent<AudioSource>().isPlaying == false && speaker != null)
+        {
+            if (speaker.GetComponent<AudioSource>().isPlaying)
+            {
+                usingSpeaker = true;
+            }
         }
         else
         {
             flowField.SetActive(false);
         }
 
-        if (speaker != null)
-        {
-            if (audioPeer.GetComponent<AudioSource>().isPlaying == false && speaker.GetComponent<AudioSource>().isPlaying == true)
-            {
-                audioPeer = speaker;
-                flowField.SetActive(true);
-            }
-        }
-        else if (speaker == null)
-        {
-            speaker = GameObject.FindGameObjectWithTag("speaker");
-        }
-       
+
 
     }
+
+    private void FindSpeakers()
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("speaker"))
+        {
+            if (go.GetComponent<AudioSource>().isPlaying)
+            {
+                speaker = go;
+            }
+        }
+    }
+
+
 }

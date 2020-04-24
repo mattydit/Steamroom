@@ -7,6 +7,8 @@ public class AudioFlowField : MonoBehaviour
 {
     NoiseFlowField noiseFlowfield;
     public AudioPeer audioPeer;
+    public VisualManager visualManager;
+    public SpeakerAudioAnalyzer speakerAA;
 
     AudioSource audioSrc;
 
@@ -41,18 +43,6 @@ public class AudioFlowField : MonoBehaviour
     {
         audioSrc = audioPeer.GetComponent<AudioSource>();
         noiseFlowfield = GetComponent<NoiseFlowField>();
-        /*
-        audioMat = new Material[8];
-        colour1 = new Color[8];
-        colour2 = new Color[8];
-
-        for (int i = 0; i < 8; i++)
-        {
-            colour1[i] = gradient1.Evaluate((1f / 8f) * i);
-            colour2[i] = gradient2.Evaluate((1f / 8f) * i);
-            audioMat[i] = new Material(mat);
-        }
-        */
 
         int countBand = 0;
 
@@ -84,34 +74,23 @@ public class AudioFlowField : MonoBehaviour
                     noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
                 }
             }
-
-            /*
-            for (int i = 0; i < 8; i++)
+        }
+        else if (visualManager.usingSpeaker == true)
+        {
+            if (useSpeed)
             {
-
-                if (audioPeer.audioBandBuffer[i] > colourThreshold1)
-                {
-                    audioMat[i].SetColor(colourName1, colour1[i] * audioPeer.audioBandBuffer[i] * colourMultiplier1);
-                }
-                else
-                {
-                    audioMat[i].SetColor(colourName1, colour1[i] * 0f);
-                }
-
-                if (audioPeer.audioBand[i] > colourThreshold2)
-                {
-                    audioMat[i].SetColor(colourName2, colour2[i] * audioPeer.audioBand[i] * colourMultiplier2);
-                }
-                else
-                {
-                    audioMat[i].SetColor(colourName2, colour2[i] * 0f);
-                }
-
+                noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;
+                noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;
             }
-            */
 
-            //noiseFlowfield.cube.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
-            //noiseFlowfield.transform.Rotate(new Vector3(0, audioPeer.audioBandBuffer[0], 0));
+            for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
+            {
+                if (useScale)
+                {
+                    float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, speakerAA.audioBandBuffer[noiseFlowfield.particles[i].audioBand]) / 2;
+                    noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
+                }
+            }
         }
     }
 

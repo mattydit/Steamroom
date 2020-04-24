@@ -12,7 +12,6 @@ public class AudioPeer : MonoBehaviour
     public bool audioSwitchedOn;
     int index = 0;
 
-    public string[] audioFiles;
     string file; //= "file://D:/Music/Madvillain - Raid feat. MED.wav";
     public static float[] bandBuffer;
     float[] bufferDecrease;
