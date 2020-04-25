@@ -86,19 +86,21 @@ public class AudioFlowField : MonoBehaviour
             {
                 speakerAA = visualManager.speaker.GetComponent<SpeakerAudioAnalyzer>();
             }
-
-            if (useSpeed)
+            else
             {
-                noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;
-                noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;
-            }
-
-            for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
-            {
-                if (useScale)
+                if (useSpeed)
                 {
-                    float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, speakerAA.audioBandBuffer[noiseFlowfield.particles[i].audioBand]) / 2;
-                    noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
+                    noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;
+                    noiseFlowfield.particleRotSpeed = Mathf.Lerp(rotateSpeedMinMax.x, rotateSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;
+                }
+
+                for (int i = 0; i < noiseFlowfield.amountOfParticles; i++)
+                {
+                    if (useScale)
+                    {
+                        float scale = Mathf.Lerp(scaleMinMax.x, scaleMinMax.y, speakerAA.audioBandBuffer[noiseFlowfield.particles[i].audioBand]) / 2;
+                        noiseFlowfield.particles[i].transform.localScale = new Vector3(scale, scale, scale);
+                    }
                 }
             }
         }

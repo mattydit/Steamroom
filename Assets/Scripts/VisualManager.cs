@@ -31,6 +31,7 @@ public class VisualManager : MonoBehaviour
             if (speaker.GetComponent<AudioSource>().isPlaying)
             {
                 usingSpeaker = true;
+                flowField.SetActive(true);
             }
         }
         else
