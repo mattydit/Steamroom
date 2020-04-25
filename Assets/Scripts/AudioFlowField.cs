@@ -38,6 +38,11 @@ public class AudioFlowField : MonoBehaviour
     public string colourName1;
     public string colourName2;
 
+    private void OnEnable()
+    {
+        speakerAA = visualManager.speaker.GetComponent<SpeakerAudioAnalyzer>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +82,11 @@ public class AudioFlowField : MonoBehaviour
         }
         else if (visualManager.usingSpeaker == true)
         {
+            if (speakerAA == null)
+            {
+                speakerAA = visualManager.speaker.GetComponent<SpeakerAudioAnalyzer>();
+            }
+
             if (useSpeed)
             {
                 noiseFlowfield.particleMoveSpeed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, speakerAA.amplitudeBuffer) / 2;

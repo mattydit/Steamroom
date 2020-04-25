@@ -1365,6 +1365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPeer: {fileID: 1883509576}
+  visualManager: {fileID: 2106565091}
+  speakerAA: {fileID: 0}
   useSpeed: 1
   moveSpeedMinMax: {x: 0, y: 80}
   rotateSpeedMinMax: {x: 50, y: 300}
@@ -2265,7 +2267,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629582251}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d57079b3e63924f4d9963affd6874a70, type: 3}
   m_Name: 
@@ -2937,6 +2939,7 @@ MonoBehaviour:
   flowField: {fileID: 1121345410}
   speaker: {fileID: 0}
   NoiseFlowField: {fileID: 1121345410}
+  usingSpeaker: 0
 --- !u!1 &2134049746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 119512, guid: 5578b82f17c954843901e8b68ca21dcc,
