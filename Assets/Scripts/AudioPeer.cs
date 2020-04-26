@@ -189,7 +189,7 @@ public class AudioPeer : MonoBehaviour
     {
         using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(file, AudioType.WAV))
         {
-            yield return www.Send();
+            yield return www.SendWebRequest();
 
             if (www.isNetworkError)
             {
@@ -238,7 +238,6 @@ public class AudioPeer : MonoBehaviour
         audioSwitchedOn = false;
         audioSrc.Stop();
         audioSrc.clip = null;
-        audioClip = null;
-        
+        audioClip = null;   
     }
 }

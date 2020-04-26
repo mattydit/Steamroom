@@ -40,7 +40,7 @@ public class AudioFlowField : MonoBehaviour
 
     private void OnEnable()
     {
-        speakerAA = visualManager.speaker.GetComponent<SpeakerAudioAnalyzer>();
+        //speakerAA = visualManager.speaker.GetComponent<SpeakerAudioAnalyzer>();
     }
 
     // Start is called before the first frame update
