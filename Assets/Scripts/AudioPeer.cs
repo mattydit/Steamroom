@@ -12,7 +12,7 @@ public class AudioPeer : MonoBehaviour
     public bool audioSwitchedOn;
     int index = 0;
 
-    string file; //= "file://D:/Music/Madvillain - Raid feat. MED.wav";
+    string file; //path to the file.
     public static float[] bandBuffer;
     float[] bufferDecrease;
 
@@ -24,7 +24,7 @@ public class AudioPeer : MonoBehaviour
     float amplitudeHighest;
 
     //Mic input
-    public AudioClip audioClip;
+    //public AudioClip audioClip;
     public bool useMicrophone;
     public string selectedDevice;
     public UnityEngine.Audio.AudioMixerGroup mixerGroupMic, mixerGroupMaster;
@@ -92,7 +92,7 @@ public class AudioPeer : MonoBehaviour
     {
         if (audioSwitchedOn == true && audioSrc.isPlaying == false)
         {
-            audioSrc.clip = audioClip;
+            //audioSrc.clip = audioClip;
             audioSrc.Play();
             //localAudioPlaying = true;
         }
@@ -197,8 +197,12 @@ public class AudioPeer : MonoBehaviour
             }
             else
             {
-                audioClip = DownloadHandlerAudioClip.GetContent(www);
-                StartCoroutine(WaitAndStop(audioClip));
+                //audioClip = DownloadHandlerAudioClip.GetContent(www);
+                audioSrc.clip = DownloadHandlerAudioClip.GetContent(www);
+                //audioClip.name = file;
+                //Debug.Log("Audio Clip Name: " + audioClip.name);
+                //StartCoroutine(WaitAndStop(audioClip));
+                StartCoroutine(WaitAndStop(audioSrc.clip));
             }
         }
 
@@ -238,6 +242,6 @@ public class AudioPeer : MonoBehaviour
         audioSwitchedOn = false;
         audioSrc.Stop();
         audioSrc.clip = null;
-        audioClip = null;   
+        //audioClip = null;
     }
 }

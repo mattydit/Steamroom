@@ -25,5 +25,11 @@ public class StreamAudio : MonoBehaviour
             recorder.TransmitEnabled = true;
             isStreaming = true;
         }
+        if (recorder.AudioClip == null)
+        {
+            recorder.StopRecording();
+            recorder.TransmitEnabled = false;
+            isStreaming = false;
+        }
     }
 }

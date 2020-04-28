@@ -25,7 +25,9 @@ public class GetAudioClip : MonoBehaviour
             recorder.SourceType = Recorder.InputSourceType.AudioClip;
             recorder.AudioClip = audioSrc.clip;
         }
-
-
+        if (audioSrc != null && audioSrc.isPlaying == false)
+        {
+            recorder.AudioClip = null;
+        }
     }
 }
