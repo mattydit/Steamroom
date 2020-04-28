@@ -14,6 +14,7 @@ public class GetAudioClip : MonoBehaviour
     void Start()
     {
         //audioSrc = audioPeer.GetComponent<AudioSource>();
+        recorder.SourceType = Recorder.InputSourceType.AudioClip;
     }
 
     // Update is called once per frame
@@ -22,7 +23,6 @@ public class GetAudioClip : MonoBehaviour
         
         if (audioSrc != null && audioSrc.isPlaying == true)
         {
-            recorder.SourceType = Recorder.InputSourceType.AudioClip;
             recorder.AudioClip = audioSrc.clip;
         }
         /*

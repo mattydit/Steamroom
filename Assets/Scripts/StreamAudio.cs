@@ -27,7 +27,6 @@ public class StreamAudio : MonoBehaviour
         }
         if (recorder.AudioClip == null)
         {
-            //recorder.StopRecording();
             recorder.TransmitEnabled = false;
             isStreaming = false;
         }
