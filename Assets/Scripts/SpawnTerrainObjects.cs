@@ -29,11 +29,12 @@ public class SpawnTerrainObjects : MonoBehaviour
             Vector3 instancePos = transform.TransformPoint(randomVertPos);
             Vector3 normal = mesh.normals[vertIndex];
 
-            Quaternion rotation = Quaternion.LookRotation(normal);
+            Quaternion rotation = Quaternion.Euler(normal);
 
             GameObject go = terrainObjects[(int)Random.Range(0, terrainObjects.Length)];
-            GameObject instance = Instantiate(go, instancePos, rotation, gameObject.transform);
+            GameObject instance = Instantiate(go, instancePos, Quaternion.identity, gameObject.transform);
             instance.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+            instance.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         }
     }
 

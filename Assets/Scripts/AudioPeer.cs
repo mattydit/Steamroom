@@ -244,4 +244,16 @@ public class AudioPeer : MonoBehaviour
         audioSrc.clip = null;
         //audioClip = null;
     }
+
+    private void CheckifPlaying()
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("speaker"))
+        {
+            if (go.GetComponent<AudioSource>().isPlaying)
+            {
+                
+            }
+        }
+    }
+
 }
