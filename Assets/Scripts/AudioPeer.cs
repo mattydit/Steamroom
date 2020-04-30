@@ -199,7 +199,7 @@ public class AudioPeer : MonoBehaviour
             {
                 //audioClip = DownloadHandlerAudioClip.GetContent(www);
                 audioSrc.clip = DownloadHandlerAudioClip.GetContent(www);
-                //audioClip.name = file;
+                audioSrc.clip.name = GetClipName(file);
                 //Debug.Log("Audio Clip Name: " + audioClip.name);
                 //StartCoroutine(WaitAndStop(audioClip));
                 StartCoroutine(WaitAndStop(audioSrc.clip));
@@ -256,4 +256,20 @@ public class AudioPeer : MonoBehaviour
         }
     }
 
+    public string GetClipName(string clipPath)
+    {
+        string[] parts = clipPath.Split('\\');
+        string clipName = "";
+        
+        for (int i = 0; i < parts.Length; i++)
+        {
+            if (parts[i].Contains(".wav") || parts[i].Contains(".ogg"))
+            {
+                string[] parts2 = parts[i].Split('.');
+                clipName = parts2[0];
+            }
+        }
+
+        return clipName;
+    }
 }
