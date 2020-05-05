@@ -8,7 +8,10 @@ public class VisualManager : MonoBehaviour
     public GameObject flowField;
     public GameObject speaker;
     public GameObject NoiseFlowField;
+    public GameObject CubeVisual;
     public bool usingSpeaker;
+    public int waitSeconds;
+    public bool visualSwapping;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,12 @@ public class VisualManager : MonoBehaviour
 
         if (audioPeer.GetComponent<AudioSource>().isPlaying)
         {
-            flowField.SetActive(true);
+            if (visualSwapping == false)
+            {
+                StartCoroutine(VisualSwap());
+                visualSwapping = true;
+            }
+            
             usingSpeaker = false;
         }
         else if (audioPeer.GetComponent<AudioSource>().isPlaying == false && speaker != null)
@@ -31,15 +39,19 @@ public class VisualManager : MonoBehaviour
             if (speaker.GetComponent<AudioSource>().isPlaying)
             {
                 usingSpeaker = true;
-                flowField.SetActive(true);
+
+                if (visualSwapping == false)
+                {
+                    StartCoroutine(VisualSwap());
+                    visualSwapping = true;
+                }
             }
         }
         else
         {
             flowField.SetActive(false);
+            CubeVisual.SetActive(false);
         }
-
-
 
     }
 
@@ -54,5 +66,16 @@ public class VisualManager : MonoBehaviour
         }
     }
 
+    IEnumerator VisualSwap()
+    {
+        flowField.SetActive(true);
+        yield return new WaitForSeconds(waitSeconds);
+        flowField.SetActive(false);
+        CubeVisual.SetActive(true);
+        yield return new WaitForSeconds(waitSeconds);
+        CubeVisual.SetActive(false);
+        visualSwapping = false;
+
+    }
 
 }
