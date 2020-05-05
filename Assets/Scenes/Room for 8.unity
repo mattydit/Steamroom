@@ -820,11 +820,11 @@ GameObject:
   - component: {fileID: 820982193}
   m_Layer: 0
   m_Name: VoiceChat
-  m_TagString: Untagged
+  m_TagString: VoiceChat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &820982193
 MonoBehaviour:
   m_ObjectHideFlags: 0
