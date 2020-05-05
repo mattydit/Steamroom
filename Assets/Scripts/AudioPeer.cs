@@ -44,6 +44,10 @@ public class AudioPeer : MonoBehaviour
     public float binWidth;
     public float sampleRate;
 
+    //error checking
+    public VisualManager visualManager;
+    public GameObject unableToPlay;
+
     private void Awake()
     {
         int logFrameSize = (int)Mathf.Log(frameSize, 2);
@@ -227,15 +231,23 @@ public class AudioPeer : MonoBehaviour
     private void LoadFileUsingPath(string path)
     {
         Debug.Log(path);
-        if (path.Length != 0)
+        if (audioSrc.isPlaying || visualManager.usingSpeaker)
         {
-            file = path;
+            unableToPlay.SetActive(true);
+            StartCoroutine(DisableAfterSeconds(5, unableToPlay));
         }
+        else
+        {
+            if (path.Length != 0)
+            {
+                file = path;
+            }
 
-        StartCoroutine(GetAudioClip());
+            StartCoroutine(GetAudioClip());
 
-        audioSwitchedOn = true;
-        localAudioPlaying = true;
+            audioSwitchedOn = true;
+            localAudioPlaying = true;
+        }
     }
 
     IEnumerator WaitAndStop(AudioClip audioClip)
@@ -275,4 +287,9 @@ public class AudioPeer : MonoBehaviour
         return clipName;
     }
 
+    IEnumerator DisableAfterSeconds(int seconds, GameObject go)
+    {
+        yield return new WaitForSeconds(seconds);
+        go.SetActive(false);
+    }
 }
