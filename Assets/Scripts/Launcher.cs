@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using Oculus.Platform;
+using Oculus.Platform.Models;
 
 public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -19,10 +21,13 @@ public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
 
     bool isConnecting;
 
-    public const byte InstantiateVrAvatarEventCode = 5;
+    public const byte InstantiateVrAvatarEventCode = 123;
 
     [SerializeField]
     private string roomName = "steamroomOculus";
+
+     string oculusId;
+    private string username;
 
     private void OnEnable()
     {
@@ -38,7 +43,84 @@ public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
 
     void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;    
+        PhotonNetwork.AutomaticallySyncScene = true;
+        Core.AsyncInitialize().OnComplete(OnInitializationCallback);
+    }
+
+    private void OnInitializationCallback(Message<PlatformInitialize> msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error during initialization. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            Entitlements.IsUserEntitledToApplication().OnComplete(OnIsEntitledCallback);
+        }
+    }
+
+    private void OnIsEntitledCallback(Message msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error verifying the user is entitled to the application. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            GetLoggedInUser();
+        }
+    }
+
+    private void GetLoggedInUser()
+    {
+        Users.GetLoggedInUser().OnComplete(OnLoggedInUserCallback);
+    }
+
+    private void OnLoggedInUserCallback(Message<User> msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error getting logged in user. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            oculusId = msg.Data.ID.ToString(); // do not use msg.Data.OculusID;
+            Debug.Log(oculusId);
+            Debug.Log(msg.Data.OculusID);
+            username = msg.Data.OculusID;
+            GetUserProof();
+        }
+    }
+
+    private void GetUserProof()
+    {
+        Users.GetUserProof().OnComplete(OnUserProofCallback);
+    }
+
+    private void OnUserProofCallback(Message<UserProof> msg)
+    {
+        if (msg.IsError)
+        {
+            Debug.LogErrorFormat("Oculus: Error getting user proof. Error Message: {0}",
+                msg.GetError().Message);
+        }
+        else
+        {
+            string oculusNonce = msg.Data.Value;
+            // Photon Authentication can be done here
+
+            PhotonNetwork.AuthValues = new AuthenticationValues();
+            PhotonNetwork.AuthValues.UserId = oculusId;
+            PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Oculus;
+            PhotonNetwork.AuthValues.AddAuthParameter("userid", oculusId);
+            PhotonNetwork.AuthValues.AddAuthParameter("nonce", oculusNonce);
+            PhotonNetwork.NickName = username;
+
+            Connect();
+        }
     }
 
     // Start is called before the first frame update
@@ -102,7 +184,9 @@ public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
         Debug.Log("Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        PhotonNetwork.CreateRoom(null, new RoomOptions());
+        Photon.Realtime.RoomOptions roomOptions = new Photon.Realtime.RoomOptions();
+        roomOptions.PublishUserId = true;
+        PhotonNetwork.CreateRoom(null, roomOptions);
     }
 
     public override void OnJoinedRoom()
@@ -111,9 +195,12 @@ public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
         controlPanel.SetActive(true);
         Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
 
-        /*
         GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
         PhotonView photonView = localAvatar.GetComponent<PhotonView>();
+        OvrAvatar ovrAvatarlocal = localAvatar.GetComponent<OvrAvatar>();
+
+        ovrAvatarlocal.oculusUserID = oculusId;
+        Debug.Log(Users.GetLoggedInUser().ToString());
 
         if (PhotonNetwork.AllocateViewID(photonView))
         {
@@ -131,21 +218,22 @@ public class Launcher : MonoBehaviourPunCallbacks, IOnEventCallback
 
             Destroy(localAvatar);
         }
-        */
 
         PhotonNetwork.LoadLevel(1);
     }
 
     public void OnEvent(EventData photonEvent)
     {
-        /*
         if (photonEvent.Code == InstantiateVrAvatarEventCode)
         {
-            GameObject remoteAvatar = Instantiate(Resources.Load("RemoveAvatar")) as GameObject;
+            GameObject remoteAvatar = Instantiate(Resources.Load("RemoteAvatar")) as GameObject;
             PhotonView photonView = remoteAvatar.GetComponent<PhotonView>();
+            OvrAvatar ovrAvatarRemote = remoteAvatar.GetComponent<OvrAvatar>();
+            TMPro.TextMeshPro playername = remoteAvatar.GetComponentInChildren<TMPro.TextMeshPro>();
             photonView.ViewID = (int)photonEvent.CustomData;
+            ovrAvatarRemote.oculusUserID = photonView.Owner.UserId;
+            playername.text = photonView.Owner.NickName;
         }
-        */
     }
 
     #endregion

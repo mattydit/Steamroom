@@ -21,6 +21,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
     private string oculusId;
     private string username;
 
+    public GameObject terrainObjects;
 
     private void Awake()
     {
@@ -102,6 +103,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             PhotonNetwork.NickName = username;
 
             Connect();
+            
         }
     }
 
@@ -201,6 +203,7 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
 
             Destroy(localAvatar);
         }
+        terrainObjects.SetActive(true);
     }
 
     public void OnJoinRoomFailed(short returnCode, string message)

@@ -7,7 +7,7 @@ using Photon.Realtime;
 using Photon.Voice.PUN;
 using ExitGames.Client.Photon;
 
-public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
+public class GameManager : MonoBehaviourPunCallbacks
 {
     //public GameObject playerPrefab;
 
@@ -43,26 +43,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
         }
         */
-
-        GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
-        PhotonView photonView = localAvatar.GetComponent<PhotonView>();
-
-        if (PhotonNetwork.AllocateViewID(photonView))
-        {
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
-            {
-                CachingOption = EventCaching.AddToRoomCache,
-                Receivers = ReceiverGroup.Others
-            };
-
-            PhotonNetwork.RaiseEvent(InstantiateVrAvatarEventCode, photonView.ViewID, raiseEventOptions, SendOptions.SendReliable);
-        }
-        else
-        {
-            Debug.LogError("Failed to allocate a ViewID");
-
-            Destroy(localAvatar);
-        }
+        
+      
     }
 
     // Update is called once per frame
@@ -105,6 +87,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
     }
 
+    /*
     public void OnEvent(EventData photonEvent)
     {
         if (photonEvent.Code == InstantiateVrAvatarEventCode)
@@ -114,4 +97,5 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
             photonView.ViewID = (int)photonEvent.CustomData;
         }
     }
+    */
 }
