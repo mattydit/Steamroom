@@ -165,3 +165,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db35819e57a38c2478a91981db789630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioCubes: {fileID: 0}
+  tumble: 5

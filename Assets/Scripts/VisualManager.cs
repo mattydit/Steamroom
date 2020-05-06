@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VisualManager : MonoBehaviour
 {
-    public GameObject audioPeer;
+    public AudioPeer audioPeer;
     public GameObject flowField;
     public GameObject speaker;
     public GameObject NoiseFlowField;
@@ -24,7 +24,7 @@ public class VisualManager : MonoBehaviour
     {
         FindSpeakers();
 
-        if (audioPeer.GetComponent<AudioSource>().isPlaying)
+        if (audioPeer.audioSwitchedOn == true)
         {
             if (visualSwapping == false)
             {
@@ -34,7 +34,7 @@ public class VisualManager : MonoBehaviour
             
             usingSpeaker = false;
         }
-        else if (audioPeer.GetComponent<AudioSource>().isPlaying == false && speaker != null)
+        else if (audioPeer.audioSwitchedOn == false && speaker != null)
         {
             if (speaker.GetComponent<AudioSource>().isPlaying)
             {
@@ -75,7 +75,6 @@ public class VisualManager : MonoBehaviour
         yield return new WaitForSeconds(waitSeconds);
         CubeVisual.SetActive(false);
         visualSwapping = false;
-
     }
 
 }

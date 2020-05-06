@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mushroom_All1
       objectReference: {fileID: 0}
+    - target: {fileID: 157684, guid: 4f08c1e18e3fd2b438baf97a89b44f8e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 497000, guid: 4f08c1e18e3fd2b438baf97a89b44f8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29
@@ -471,6 +475,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Type2 04
       objectReference: {fileID: 0}
+    - target: {fileID: 119512, guid: 5578b82f17c954843901e8b68ca21dcc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 451560, guid: 5578b82f17c954843901e8b68ca21dcc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.44
@@ -532,6 +540,10 @@ PrefabInstance:
     - target: {fileID: 119512, guid: 5578b82f17c954843901e8b68ca21dcc, type: 3}
       propertyPath: m_Name
       value: Rock Type2 04
+      objectReference: {fileID: 0}
+    - target: {fileID: 119512, guid: 5578b82f17c954843901e8b68ca21dcc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 451560, guid: 5578b82f17c954843901e8b68ca21dcc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -694,13 +706,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812541825}
+  - component: {fileID: 812541827}
+  - component: {fileID: 812541826}
   m_Layer: 0
   m_Name: EnvDecorations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &812541825
 Transform:
   m_ObjectHideFlags: 0
@@ -724,6 +738,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812541826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812541824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &812541827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812541824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ab4ef6e8e13704eb0b3a2de6d4a5ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainObjects:
+  - {fileID: 157684, guid: 4f08c1e18e3fd2b438baf97a89b44f8e, type: 3}
+  - {fileID: 185836, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
+  - {fileID: 117160, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
+  - {fileID: 110610, guid: 75283e9ef15245c4aab126ec6525dd2a, type: 3}
+  - {fileID: 126190, guid: be320b6d231cacc4894038f2c3375674, type: 3}
+  spawnSize: 20
+  meshFilter: {fileID: 1629582254}
+  meshCollider: {fileID: 1629582256}
 --- !u!1 &819372487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,6 +1104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mushroom_All2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 185836, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 470142, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1160,7 +1221,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Please wait until the current song is finished
+  m_text: Please wait until the current song is finished playing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1188,10 +1249,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18
-  m_fontSizeBase: 36
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1205,7 +1266,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 35
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1229,10 +1290,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 889527523}
-    characterCount: 46
+    characterCount: 54
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 8
+    spaceCount: 8
+    wordCount: 9
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -1505,6 +1566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mushroom_All2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 185836, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 470142, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.3
@@ -1579,6 +1644,10 @@ PrefabInstance:
     - target: {fileID: 185836, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
       propertyPath: m_Name
       value: mushroom_All2
+      objectReference: {fileID: 0}
+    - target: {fileID: 185836, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 470142, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1738,7 +1807,7 @@ MonoBehaviour:
   increment: 20
   offset: {x: 0, y: 0, z: 0}
   offsetSpeed: {x: 0, y: 0, z: 0}
-  particlePrefab: {fileID: 3879688637739431424, guid: 7147f5e6d0c09b344bafa0efc78cebcb,
+  particlePrefab: {fileID: 3879688637739431424, guid: cd54a2809d54c4f419450d130004f932,
     type: 3}
   amountOfParticles: 50
   particles: []
@@ -1873,6 +1942,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1170155038}
   - component: {fileID: 1170155039}
+  - component: {fileID: 1170155040}
+  - component: {fileID: 1170155041}
   m_Layer: 0
   m_Name: TerrainObjects
   m_TagString: Untagged
@@ -1911,6 +1982,49 @@ MonoBehaviour:
   - {fileID: 100000, guid: ff05fb6312481104fb330edfe716b399, type: 3}
   - {fileID: 100000, guid: 20b50cde428e8a14b87a3f09a9025d3e, type: 3}
   spawnSize: 200
+--- !u!114 &1170155040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170155037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ab4ef6e8e13704eb0b3a2de6d4a5ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainObjects:
+  - {fileID: 157684, guid: 4f08c1e18e3fd2b438baf97a89b44f8e, type: 3}
+  - {fileID: 185836, guid: 555628e97d23ecc419d3c0fa06b08777, type: 3}
+  - {fileID: 117160, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
+  - {fileID: 110610, guid: 75283e9ef15245c4aab126ec6525dd2a, type: 3}
+  - {fileID: 120164, guid: 61b490990a08faa419b1bb6a6708ad09, type: 3}
+  spawnSize: 20
+  meshFilter: {fileID: 0}
+  meshCollider: {fileID: 0}
+--- !u!114 &1170155041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170155037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &1274176878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 424814, guid: a1d761911149f7845aac6ec33c36f40e,
@@ -1927,6 +2041,10 @@ PrefabInstance:
     - target: {fileID: 117160, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
       propertyPath: m_Name
       value: mushroom_All3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 117160, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 424814, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2482,7 +2600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92860d1b341718d4aa4160f3707a804e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0.2
+  strength: 0.106
   resolution: 30
   frequency: 5
   octaves: 8
@@ -2579,7 +2697,7 @@ Transform:
   m_GameObject: {fileID: 1629582251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 50, z: 100}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 1170155038}
   m_Father: {fileID: 0}
@@ -2596,7 +2714,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!4 &1649228165 stripped
@@ -2710,6 +2828,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mushroom_All3
       objectReference: {fileID: 0}
+    - target: {fileID: 117160, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 424814, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20
@@ -2768,12 +2890,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
---- !u!1 &1775126729 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6305508294742371685, guid: 3c4cf27e06fdf3943bc7386aa5d15d72,
-    type: 3}
-  m_PrefabInstance: {fileID: 34593677}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1807472366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,7 +3043,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 34593677}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775126729}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65b66d19add2fc54c9c476861ced7092, type: 3}
@@ -3193,6 +3309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Type3 01
       objectReference: {fileID: 0}
+    - target: {fileID: 121128, guid: b73c6c1069411b947aaaa9d12c37c652, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 486942, guid: b73c6c1069411b947aaaa9d12c37c652, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.96
@@ -3445,7 +3565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8b0da16a5168e4b8893c818942e050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioPeer: {fileID: 1775126729}
+  audioPeer: {fileID: 1883509576}
   flowField: {fileID: 1121345410}
   speaker: {fileID: 0}
   NoiseFlowField: {fileID: 1121345410}
