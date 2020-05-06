@@ -21,7 +21,6 @@ public class SpawnBigObjects : MonoBehaviour
     {
         //photonView = GetComponent<PhotonView>();
         meshFilter = GetComponentInParent<MeshFilter>();
-        meshCollider = GetComponentInParent<MeshCollider>();
         mesh = meshFilter.mesh;
         min = mesh.bounds.min;
         max = mesh.bounds.max;
@@ -45,11 +44,8 @@ public class SpawnBigObjects : MonoBehaviour
             Vector3 randomVertPos = mesh.vertices[vertIndex];
             Vector3 instancePos = transform.TransformPoint(randomVertPos);
             
-            Vector3 normal = mesh.normals[vertIndex];
+            //Vector3 normal = mesh.normals[vertIndex];
             Vector3 yOffsetPos = new Vector3(instancePos.x, instancePos.y - 0.4f, instancePos.z);
-            //normalPos = meshCollider.ClosestPoint(normalPos);
-
-            //Quaternion rotation = Quaternion.Euler(normal);
 
             GameObject go = terrainObjects[(int)Random.Range(0, terrainObjects.Length)];
             GameObject instance = Instantiate(go, yOffsetPos, Quaternion.identity, gameObject.transform);

@@ -203,11 +203,9 @@ public class AudioPeer : MonoBehaviour
             }
             else
             {
-                //audioClip = DownloadHandlerAudioClip.GetContent(www);
                 audioSrc.clip = DownloadHandlerAudioClip.GetContent(www);
                 audioSrc.clip.name = GetClipName(file);
-                //Debug.Log("Audio Clip Name: " + audioClip.name);
-                //StartCoroutine(WaitAndStop(audioClip));
+                
                 StartCoroutine(WaitAndStop(audioSrc.clip));
             }
         }
@@ -231,7 +229,7 @@ public class AudioPeer : MonoBehaviour
     private void LoadFileUsingPath(string path)
     {
         Debug.Log(path);
-        if (audioSrc.isPlaying || visualManager.usingSpeaker)
+        if (audioSrc.isPlaying)
         {
             unableToPlay.SetActive(true);
             StartCoroutine(DisableAfterSeconds(5, unableToPlay));

@@ -29,13 +29,14 @@ public class VisualManager : MonoBehaviour
 
         if (audioPeer.audioSwitchedOn == true)
         {
+            usingSpeaker = false;
+
             if (visualSwapping == false)
             {
                 StartCoroutine(VisualSwap());
                 visualSwapping = true;
-            }
-            
-            usingSpeaker = false;
+            } 
+
         }
         else if (audioPeer.audioSwitchedOn == false && speaker != null)
         {
@@ -48,6 +49,7 @@ public class VisualManager : MonoBehaviour
                     StartCoroutine(VisualSwap());
                     visualSwapping = true;
                 }
+                
             }
         }
         else
