@@ -31,8 +31,6 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
-  - SetSongTitle
-  - SetSongName
   - RPC_SpawnObjects
   DisableAutoOpenWizard: 1
   ShowSettings: 1

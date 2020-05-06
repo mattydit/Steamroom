@@ -21,8 +21,6 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
     private string oculusId;
     private string username;
 
-    public GameObject terrainObjects;
-
     private void Awake()
     {
         //myAvatar = GetComponent<OvrAvatar>();
@@ -202,11 +200,6 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
             Debug.LogError("Failed to allocate a ViewID");
 
             Destroy(localAvatar);
-        }
-        //terrainObjects.SetActive(true);
-        if (PhotonNetwork.IsMasterClient)
-        {
-            terrainObjects.GetComponent<PhotonView>().RPC("RPC_SpawnObjects", RpcTarget.AllBuffered);
         }
     }
 

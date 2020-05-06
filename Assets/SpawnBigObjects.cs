@@ -26,9 +26,8 @@ public class SpawnBigObjects : MonoBehaviour
         min = mesh.bounds.min;
         max = mesh.bounds.max;
 
-        //photonView.RPC("RPC_SpawnObjects", RpcTarget.AllBuffered);
-        
-        //RPC_SpawnObjects();
+        Random.InitState(123);
+        SpawnObjects();
     }
 
     // Update is called once per frame
@@ -37,8 +36,7 @@ public class SpawnBigObjects : MonoBehaviour
         
     }
 
-    [PunRPC]
-    void RPC_SpawnObjects()
+    void SpawnObjects()
     {
         for (int i = 0; i < spawnSize; i++)
         {
