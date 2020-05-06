@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Voice.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class VisualManager : MonoBehaviour
     public bool usingSpeaker;
     public int waitSeconds;
     public bool visualSwapping;
+    public Recorder recorder;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +38,7 @@ public class VisualManager : MonoBehaviour
         }
         else if (audioPeer.audioSwitchedOn == false && speaker != null)
         {
-            if (speaker.GetComponent<AudioSource>().isPlaying)
+            if (speaker.GetComponent<AudioSource>().isPlaying && recorder.SourceType == Recorder.InputSourceType.AudioClip)
             {
                 usingSpeaker = true;
 
