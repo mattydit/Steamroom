@@ -203,7 +203,11 @@ public class NetworkManager : MonoBehaviour, IConnectionCallbacks, IMatchmakingC
 
             Destroy(localAvatar);
         }
-        terrainObjects.SetActive(true);
+        //terrainObjects.SetActive(true);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            terrainObjects.GetComponent<PhotonView>().RPC("RPC_SpawnObjects", RpcTarget.AllBuffered);
+        }
     }
 
     public void OnJoinRoomFailed(short returnCode, string message)

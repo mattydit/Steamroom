@@ -19,14 +19,14 @@ public class SpawnBigObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        //photonView = GetComponent<PhotonView>();
         meshFilter = GetComponentInParent<MeshFilter>();
         meshCollider = GetComponentInParent<MeshCollider>();
         mesh = meshFilter.mesh;
         min = mesh.bounds.min;
         max = mesh.bounds.max;
 
-        photonView.RPC("RPC_SpawnObjects", RpcTarget.AllBuffered);
+        //photonView.RPC("RPC_SpawnObjects", RpcTarget.AllBuffered);
         
         //RPC_SpawnObjects();
     }
