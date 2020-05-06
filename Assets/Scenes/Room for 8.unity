@@ -697,6 +697,153 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &739452685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739452686}
+  - component: {fileID: 739452688}
+  - component: {fileID: 739452687}
+  m_Layer: 0
+  m_Name: NoiseFlowField (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &739452686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739452685}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -48, y: 3, z: -49.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106565090}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739452687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739452685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec56543bb237274ca2d132dfddc31e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPeer: {fileID: 1883509576}
+  visualManager: {fileID: 2106565091}
+  speakerAA: {fileID: 0}
+  useSpeed: 1
+  moveSpeedMinMax: {x: 0, y: 80}
+  rotateSpeedMinMax: {x: 50, y: 300}
+  useScale: 1
+  scaleMinMax: {x: 0, y: 3}
+  mat: {fileID: 2100000, guid: f4e0bfb4c082f72469533623b5fdf9b5, type: 2}
+  useColour1: 0
+  useColour2: 0
+  gradient1:
+    serializedVersion: 2
+    key0: {r: 0.96732485, g: 0.4292453, b: 1, a: 1}
+    key1: {r: 0.10679956, g: 0.9056604, b: 0.8915989, a: 1}
+    key2: {r: 0.15566039, g: 0.46211776, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 16384
+    ctime1: 35466
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  gradient2:
+    serializedVersion: 2
+    key0: {r: 0.41901034, g: 0.8301887, b: 0.45200634, a: 1}
+    key1: {r: 0.36320752, g: 0.48457342, b: 1, a: 1}
+    key2: {r: 0.37453222, g: 0.554713, b: 0.88878953, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 3662
+    ctime1: 40863
+    ctime2: 45104
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 24094
+    atime1: 31226
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  colourThreshold1: 0.284
+  colourMultiplier1: 1
+  colourThreshold2: 0.53
+  colourMultiplier2: 3
+  colourName1: _Color
+  colourName2: _EmissionColor
+--- !u!114 &739452688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739452685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12554a4811ed4c14297e9465140336e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: {x: 20, y: 5, z: 20}
+  cellSize: 5
+  increment: 20
+  offset: {x: 0, y: 0, z: 0}
+  offsetSpeed: {x: 0, y: 0, z: 0}
+  particlePrefab: {fileID: 3879688637739431424, guid: 7147f5e6d0c09b344bafa0efc78cebcb,
+    type: 3}
+  amountOfParticles: 50
+  particles: []
+  particleMeshRenderer: []
+  particleScale: 0.5
+  particleMoveSpeed: 10
+  particleRotSpeed: 100
+  spawnRadius: 1
+  BigCubeMaterial: {fileID: 0}
+  cube: {fileID: 0}
 --- !u!1 &812541824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,7 +2079,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: steamroomOculus
-  terrainObjects: {fileID: 1170155037}
 --- !u!1 &1170155037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2001,6 +2147,9 @@ MonoBehaviour:
   - {fileID: 117160, guid: a1d761911149f7845aac6ec33c36f40e, type: 3}
   - {fileID: 110610, guid: 75283e9ef15245c4aab126ec6525dd2a, type: 3}
   - {fileID: 120164, guid: 61b490990a08faa419b1bb6a6708ad09, type: 3}
+  - {fileID: 1309910605144772, guid: 27ce25370e5628e4097b7cb95b3a151d, type: 3}
+  - {fileID: 1218347679047942, guid: fa6105287f77b1240a0017f7d23434c2, type: 3}
+  - {fileID: 1400461039152700, guid: c7821bc923171f24094e69062402d005, type: 3}
   spawnSize: 20
   meshFilter: {fileID: 0}
   meshCollider: {fileID: 0}
@@ -3551,6 +3700,7 @@ Transform:
   m_Children:
   - {fileID: 1121345412}
   - {fileID: 1618700712}
+  - {fileID: 739452686}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3568,8 +3718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioPeer: {fileID: 1883509576}
   flowField: {fileID: 1121345410}
+  flowField2: {fileID: 0}
   speaker: {fileID: 0}
-  NoiseFlowField: {fileID: 1121345410}
   CubeVisual: {fileID: 1618700711}
   usingSpeaker: 0
   waitSeconds: 60

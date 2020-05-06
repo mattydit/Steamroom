@@ -49,7 +49,7 @@ public class NoiseFlowField : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
 
         flowfieldDirection = new Vector3[gridSize.x, gridSize.y, gridSize.z];

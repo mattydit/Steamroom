@@ -46,7 +46,7 @@ public class SpawnBigObjects : MonoBehaviour
             Vector3 instancePos = transform.TransformPoint(randomVertPos);
             
             Vector3 normal = mesh.normals[vertIndex];
-            Vector3 yOffsetPos = new Vector3(instancePos.x, instancePos.y - 0.6f, instancePos.z);
+            Vector3 yOffsetPos = new Vector3(instancePos.x, instancePos.y - 0.4f, instancePos.z);
             //normalPos = meshCollider.ClosestPoint(normalPos);
 
             //Quaternion rotation = Quaternion.Euler(normal);

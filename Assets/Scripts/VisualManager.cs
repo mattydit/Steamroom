@@ -7,13 +7,14 @@ public class VisualManager : MonoBehaviour
 {
     public AudioPeer audioPeer;
     public GameObject flowField;
+    public GameObject flowField2;
     public GameObject speaker;
-    public GameObject NoiseFlowField;
     public GameObject CubeVisual;
     public bool usingSpeaker;
     public int waitSeconds;
     public bool visualSwapping;
-    public Recorder recorder;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class VisualManager : MonoBehaviour
         }
         else if (audioPeer.audioSwitchedOn == false && speaker != null)
         {
-            if (speaker.GetComponent<AudioSource>().isPlaying && recorder.SourceType == Recorder.InputSourceType.AudioClip)
+            if (speaker.GetComponent<AudioSource>().isPlaying)
             {
                 usingSpeaker = true;
 
@@ -73,6 +74,12 @@ public class VisualManager : MonoBehaviour
         flowField.SetActive(true);
         yield return new WaitForSeconds(waitSeconds);
         flowField.SetActive(false);
+        CubeVisual.SetActive(true);
+        yield return new WaitForSeconds(waitSeconds);
+        CubeVisual.SetActive(false);
+        flowField2.SetActive(true);
+        yield return new WaitForSeconds(waitSeconds);
+        flowField2.SetActive(false);
         CubeVisual.SetActive(true);
         yield return new WaitForSeconds(waitSeconds);
         CubeVisual.SetActive(false);
