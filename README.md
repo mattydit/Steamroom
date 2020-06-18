@@ -10,4 +10,4 @@ Assets used:
 
 Screenshots:
 
-![avatar1](/screenshots/avatar_ok.png)
+![avatar1](https://github.com/mattydit/Steamroom/blob/master/screenshots/avatar_ok.jpg)
