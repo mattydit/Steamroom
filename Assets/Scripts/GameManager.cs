@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+Old Game manager. Not used anymore.
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

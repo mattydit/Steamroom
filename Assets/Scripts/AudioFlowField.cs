@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+Animating the NoiseFlowField using audio.
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

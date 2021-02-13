@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+Cube visualization. Generating cubes at random points on the map vertices.
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

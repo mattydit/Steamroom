@@ -1,4 +1,7 @@
-﻿using GracesGames.SimpleFileBrowser.Scripts;
+﻿/*
+Class used for analysing audio and selecting audio clip from path.
+*/
+using GracesGames.SimpleFileBrowser.Scripts;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;

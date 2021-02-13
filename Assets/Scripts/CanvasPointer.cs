@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+Class used for the menu pointer.
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
